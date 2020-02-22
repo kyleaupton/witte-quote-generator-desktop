@@ -1,0 +1,491 @@
+{"code":"295","value":"1.8550 ionitriert","_id":"02L3AlQ23UK3qLqt"}
+{"code":"561","value":"Statotherm 9593-HD","_id":"06eIuygJVkFYE87m"}
+{"code":"096","value":"DIN 2.4819 (Hastelloy C276)","_id":"0OA7P4Npntzy85Mz"}
+{"code":"826","value":"Silicon/FEP-FDA","_id":"0Rn9QIvxS2bamP0k"}
+{"code":"047","value":"DIN 1.7709","_id":"0U8hF3w2goDxhyCv"}
+{"code":"348","value":"ESU-N ionitriert","_id":"0ZMU0dTnSIaoweJd"}
+{"code":"124","value":"DIN 1.4112-X","_id":"0aVOgXQ6POHZToap"}
+{"code":"593","value":"Polyesterfolie","_id":"0eh75yM8HF2OSsM0"}
+{"code":"827","value":"AFM 34","_id":"0f0ddVfszHHX6jox"}
+{"code":"063","value":"DIN 1.2344 (H13 tool steel)","_id":"10ocJOqXEmTkgBLg"}
+{"code":"326","value":"1.3343+PTFE","_id":"1cyeA29FTRGq773Q"}
+{"code":"209","value":"GG + 92Shore A","_id":"1gXZbla3OIdE9dPE"}
+{"code":"265","value":"1.4541 + PTFE","_id":"1lAJk7ArCKrKRR2J"}
+{"code":"581","value":"Garlock 200i","_id":"1yi6prlrWisWIYC0"}
+{"code":"084","value":"Guss","_id":"2Di4GARjSE7tUm1H"}
+{"code":"715","value":"SINT A 50","_id":"2EWWPBNHSQiSHhmW"}
+{"code":"071","value":"DIN 2.4602 (Hastelloy C22)","_id":"2RWp46yngrNquHSC"}
+{"code":"546","value":"Buramex SF 6335","_id":"2URFNBOZ9s4ek7ey"}
+{"code":"573","value":"IFG 5500","_id":"2VPEYyUAtBlpXiys"}
+{"code":"015","value":"DIN 1.4313 (400 series stainless)","_id":"2VWW6tEIpmkI3VAI"}
+{"code":"353","value":"1.2344 ion+kugelges","_id":"2ZVfjQSZ6I7PIAss"}
+{"code":"044","value":"10","_id":"2mqEjeg0LaGcB90g"}
+{"code":"312","value":"1.4112+TiN+WC","_id":"2uQrNYMZ6TUn307A"}
+{"code":"579","value":"ISOPLAN 1100","_id":"3AeDnGBVAN0UG51e"}
+{"code":"090","value":"DIN 1.4122 (stainless steel)","_id":"3QWtptgMnLObIChe"}
+{"code":"201","value":"Carbon steel + NiAg","_id":"3dThlD496iq3Jidf"}
+{"code":"442","value":"1.2379+PTFE","_id":"4Dp4k8SnRpOXlZe5"}
+{"code":"216","value":"1.5415 + boriert","_id":"4Gb48rb7cvZSKvBU"}
+{"code":"330","value":"1.4539kolsterisiert","_id":"4JveOS8YmJJyn7Ch"}
+{"code":"562","value":"NB","_id":"4pAwTEKgrOEx9QVa"}
+{"code":"564","value":"IGLIDUR L100","_id":"4qIb47G67BWF2Ht8"}
+{"code":"106","value":"DIN 1.2343 (H11 tool steel)","_id":"4txdF6ulZL6TK4WM"}
+{"code":"238","value":"GSF-40Cr4N","_id":"4uGc3cUHVylbm69P"}
+{"code":"306","value":"1.4539","_id":"4wDlV0LFVteaBvkg"}
+{"code":"277","value":"0.7040+nitriert","_id":"4wKwfsHjYSvcb2ln"}
+{"code":"367","value":"ZrO2 + Dylyn 180","_id":"5GKffBBTiVPdbFFe"}
+{"code":"366","value":"1.4112+Dylyn180","_id":"5IFZ2vh7VMQFk5fk"}
+{"code":"070","value":"DIN 1.4923","_id":"5PsMAfej0TE5jSrA"}
+{"code":"207","value":"DIN 8.8 zinc","_id":"5RsD4dWgQtM3Gw3i"}
+{"code":"566","value":"Wolframcarbid","_id":"5cGkygTuFcI2rQrx"}
+{"code":"118","value":"CPM REX M4","_id":"5dP6IBHte1UHA40P"}
+{"code":"596","value":"FFKM G80T","_id":"5eZtANaEHAzYdEbP"}
+{"code":"204","value":"DIN 1.4571","_id":"5fpek4RucMQmsrqR"}
+{"code":"013","value":"5.8","_id":"5l2osTxxjVQSr49c"}
+{"code":"553","value":"TecHNOX 2000 (ZrO2)","_id":"5rblJAHJwOY9MNTK"}
+{"code":"314","value":"4.6 vzk","_id":"6DBWNw1L40XNjJH7"}
+{"code":"716","value":"Aluminium Bronze","_id":"6IVMjsLDDdHBsyXK"}
+{"code":"515","value":"Bume 5","_id":"6Lx34AHahDfMTFBg"}
+{"code":"281","value":"1.4571+TiN","_id":"6Nxqno634yp6mljn"}
+{"code":"394","value":"1.2379+MaxitCrN-Mod","_id":"6Rd42lMQKAB95eQv"}
+{"code":"287","value":"Kohle+Chem Coat","_id":"6SesxS5i2PYEcFlO"}
+{"code":"116","value":"DIN 1.2379","_id":"6Uf0ELWPCTcD9GUR"}
+{"code":"260","value":"2.4617 (HB2) + TiN","_id":"6ezSbcISPIDOwFo2"}
+{"code":"310","value":"Inconel 600","_id":"6g17jOW59vGkUiO3"}
+{"code":"131","value":"DIN 1.2601","_id":"6g2L6eVn8ZCcAO0N"}
+{"code":"334","value":"1.4462+2.4610","_id":"7BttmdPNk2NkJdpo"}
+{"code":"388","value":"1.2343+ion+kugelstr","_id":"7DQ72u11p16HOKrX"}
+{"code":"817","value":"Chemrez 615","_id":"7KGxXiAuhpk5JILq"}
+{"code":"088","value":"DIN 2.4600 (Hastelloy B3)","_id":"7LuecWQ58YqDwrbd"}
+{"code":"568","value":"NBR 70","_id":"7NS3UibkRHKycmI6"}
+{"code":"011","value":"DIN 1.0570 (carbon steel)","_id":"7SGuUKiSihkcTR0d"}
+{"code":"396","value":"Stahl + PTFE","_id":"7SuYJvJtxOgayIrm"}
+{"code":"377","value":"1.3343+Dylyn180","_id":"7i3p6maMWNJlH3Gi"}
+{"code":"278","value":"2.4617+1.4571","_id":"7lp612spAyga3M0x"}
+{"code":"002","value":"Ck15 (carbon steel)","_id":"7sVWJbPhUr31PiAT"}
+{"code":"081","value":"DIN 1.4462 (duplex alloy)","_id":"8505xvkRhtsdbpcc"}
+{"code":"404","value":"2.4819 + TiN","_id":"85ELJ8RicNfd3KN3"}
+{"code":"288","value":"1.2344 ionitriert","_id":"8U9MLQH4QpZa9a2M"}
+{"code":"374","value":"1.4313+1.4571+Dylyn","_id":"8sE3Al638sqDAd8s"}
+{"code":"399","value":"1.8521 ionitriert","_id":"8tkwBVTdAsReG2hl"}
+{"code":"221","value":"A4 + Graphite","_id":"98wXQp9Nx1A7srBP"}
+{"code":"402","value":"1.4571+kol+MaxitCrN","_id":"9eqriof5I9KZSMvd"}
+{"code":"095","value":"Ovako 225 A","_id":"9odrnz0osbU65hMB"}
+{"code":"212","value":"1.4112 + TiN","_id":"9rYTG1TGcuhRZZkW"}
+{"code":"410","value":"2.4660 kolster.","_id":"A4qj3CD9YA2qq87r"}
+{"code":"387","value":"1.4125+TiCN","_id":"AV9VvyqWm2Ja3SyZ"}
+{"code":"533","value":"Perflourelas.(FFKM)","_id":"AW6BclPRxqsxjIiF"}
+{"code":"576","value":"Graphit / verpresst","_id":"AXDS4EbejTkoCcol"}
+{"code":"032","value":"DIN 1.6582 (4340 alloy steel)","_id":"AYtLwd8CvZciyzQu"}
+{"code":"510","value":"ITC","_id":"Ag6hMZ9nbiOLAKKo"}
+{"code":"239","value":"Silicon 70ShA","_id":"AlnMBjfiXCDWnmhY"}
+{"code":"010","value":"St70-2 (carbon steel)","_id":"Ams4o2SODxzZJKiw"}
+{"code":"276","value":"1.4539 + LW5-Beschi","_id":"Aoj9V4AJ47GBpySk"}
+{"code":"340","value":"1.8550+ionit+WC","_id":"AvL8ieHKBkLCJtcJ"}
+{"code":"227","value":"1.4571 + Chromoxid","_id":"B3XkJogrdgXkDsFb"}
+{"code":"023","value":"DIN 1.0425 (carbon steel)","_id":"BKyNgKnQLCachMjf"}
+{"code":"134","value":"SARASTEL 1","_id":"BYkN7lDuFgB4Ql00"}
+{"code":"149","value":"DIN 1.4112","_id":"Ba05xzTNZoAR1k0Z"}
+{"code":"591","value":"GARLITE 200","_id":"Bj11ZmSrswmjzkT5"}
+{"code":"423","value":"2.4668kolsterisiert","_id":"C1kr2dKRhzoSsYLY"}
+{"code":"244","value":"1.4541+NiAg","_id":"C4OwBET4cdmATyKg"}
+{"code":"007","value":"DIN 1.5415","_id":"CEsCASVEgYcfh4Jk"}
+{"code":"293","value":"1.4112 ion. + Diako","_id":"CIXEXMqlMl1IpIsh"}
+{"code":"098","value":"DIN 1.0460","_id":"CShU3PDBQez2Gm5F"}
+{"code":"381","value":"1.4571+kolst+C4C30","_id":"CUtvF9XYCv5f8TFG"}
+{"code":"811","value":"Resopal","_id":"CX6VIlq4VGcguj31"}
+{"code":"816","value":"K46 (FFKM)","_id":"DIvvCOXD6BOrdGmR"}
+{"code":"572","value":"BURASOL-U\r","_id":"DNdGWAtCDTpEKSg5"}
+{"code":"815","value":"Perlast ICE G75LT","_id":"DgvqzJKbsmNXyrSj"}
+{"code":"146","value":"DIN 1.4568","_id":"DpWJvRhgcZEP8Aas"}
+{"code":"103","value":"DIN 1.0122 (ST 37K)","_id":"DsvhAv2JQJRDqSX5"}
+{"code":"540","value":"LATTYFLON 4789","_id":"E1wKoDjf4XJts1xa"}
+{"code":"125","value":"DIN 1.4112-X","_id":"E4Ws9TDpedzNMfx3"}
+{"code":"256","value":"1.4112+TiCN PVD","_id":"EDmhul7Thwy1CYNn"}
+{"code":"037","value":"St42-3 (carbon steel)","_id":"EHCuaartfPy15i16"}
+{"code":"102","value":"St 27","_id":"EQ3oBDkc0RiNOQ7I"}
+{"code":"280","value":"NiAg + ChemCoat2020","_id":"ESNr5wpF7vr8ZZgz"}
+{"code":"821","value":"ZrO2-FDA","_id":"ETctUgpzmBMgVvyE"}
+{"code":"500","value":"Graphit","_id":"Ea3qiYqYNp1zE7fD"}
+{"code":"413","value":"1.4418 + Psolid","_id":"Ec7GDz8gHra3601P"}
+{"code":"368","value":"ESU-N+kugelgest.","_id":"ErOvjlJIc7KDJDHs"}
+{"code":"556","value":"Kunststoff","_id":"F8EK2oE7SCkVvuZR"}
+{"code":"014","value":"DIN 10.9","_id":"FB5C5MZI6BBpB4He"}
+{"code":"026","value":"DIN 1.0037 (carbon steel)","_id":"FJ51vcU9owjDWRih"}
+{"code":"390","value":"VA+PTFE","_id":"FT2Grd4UErGMBkM4"}
+{"code":"111","value":"DIN 1.4408","_id":"FWVT8PQmpqovcb6U"}
+{"code":"704","value":"MS58","_id":"FgSPaz9QyHSbgvSz"}
+{"code":"259","value":"1.4507 + TiN","_id":"FiYDerd41wSw09dD"}
+{"code":"246","value":"2.4610 (HC4)+TiN","_id":"FvFtIHRW4iVVvO2q"}
+{"code":"267","value":"1.4313 ionitriert","_id":"FwQvLc7ViLzBszOK"}
+{"code":"291","value":"1.4571+Hartchrom","_id":"G2eCYtnsbC45W2dE"}
+{"code":"097","value":"DIN 1.0305 (St 35.8)","_id":"GBeUt0O6Kid0llUD"}
+{"code":"538","value":"Isartherm 6011 A","_id":"GECSYa22r0Tg48aj"}
+{"code":"380","value":"1.4112ion.+MaxitCrN","_id":"GUNuxKAYQxmu0MRV"}
+{"code":"511","value":"Thermoflon 6230","_id":"GYbuFBhhzb874fUe"}
+{"code":"001","value":"DIN 1.4571 (316Ti stainless)","_id":"Ga6T5K1HhtItqBWG"}
+{"code":"819","value":"PTFE-FDA","_id":"GjnJY5w4IqY7VsEF"}
+{"code":"505","value":"PTFE + 10% Carbon","_id":"Gn3RzRYPq3zxMxBw"}
+{"code":"043","value":"DIN 1.4541 (321 stainless)","_id":"Gw7IW30ABra4hVEZ"}
+{"code":"401","value":"1.4112 ion+Kaniflon","_id":"HD5hnY4daCgVOyl7"}
+{"code":"133","value":"DIN 1.3505","_id":"HPamv5JRtcKtM58B"}
+{"code":"516","value":"Statotherm","_id":"HrM4TTYb5Mcqkojn"}
+{"code":"433","value":"1.4301+kaltnitriert","_id":"HvyNqd4vfxetFxUc"}
+{"code":"363","value":"1.3343 geh+MaxitCrN","_id":"HwLi5RCZwTbtzjGv"}
+{"code":"136","value":"DIN 2.4660","_id":"I0EazG0DGUkaBMqZ"}
+{"code":"372","value":"1.4112gehä+stellite","_id":"I5CjRc71Dtu8iC7W"}
+{"code":"378","value":"Inconel 600 + Ag","_id":"I67hzXuGDCYjOJAI"}
+{"code":"211","value":"1.4313 + 1.4571","_id":"IGA6izLGhUMK9y2L"}
+{"code":"501","value":"Novapress Multi","_id":"IIU219odnnoCehQ1"}
+{"code":"268","value":"1.4301 + boriert","_id":"IKklfEfIViLqiMSF"}
+{"code":"064","value":"DIN 1.7218 (4130 alloy steel)","_id":"IUjX2kDMW1DV8kz7"}
+{"code":"375","value":"2.4602+Dylyn180","_id":"IXJGCaCNL1Q3Gg5v"}
+{"code":"435","value":"1.4571+kaltnit+CrNM","_id":"IjQyepuaZYMO7Mvx"}
+{"code":"110","value":"DIN 1.8519","_id":"ImAq8oZ98pb3m1Fp"}
+{"code":"279","value":"NiAg+ChemCoat 2018","_id":"JOP3wydqdom2s7nl"}
+{"code":"361","value":"1.2344ESU-MaxitCrN","_id":"JOYF1aINKCu5uNbM"}
+{"code":"554","value":"Silicon-Kauts.VMQ70","_id":"JQKOvBkGKNSnq5LA"}
+{"code":"117","value":"DIN 1.4125","_id":"JWIGAtGB1ME2IxuG"}
+{"code":"369","value":"1.2714+MaxitCrN-Mod","_id":"JfJzpC5kubg7UHpl"}
+{"code":"371","value":"1.6580 + Cr3C2","_id":"JzxlC5vCkyTno0JD"}
+{"code":"297","value":"1.4112+Dynamant","_id":"K8w6O67v6IEWz8li"}
+{"code":"099","value":"2H","_id":"KE6evgoVxQs150ss"}
+{"code":"358","value":"1.2343+CoatingK","_id":"KJfZT1xAi5drOiXm"}
+{"code":"025","value":"DIN 1.0503 (carbon steel)","_id":"KkoYf4cdzsBwAMcu"}
+{"code":"229","value":"1.4539+vernickelt","_id":"KsgeoXktGkMujqjW"}
+{"code":"016","value":"Hardened steel","_id":"KurSPW7T5HNPjvFJ"}
+{"code":"130","value":"DIN 1.8509","_id":"KvN3ypzgJwYvfldw"}
+{"code":"424","value":"2.4610kolst. +Maxit","_id":"LA2Ua04uNgs5huoL"}
+{"code":"513","value":"EPDM","_id":"LCXB4jmAHzf9NJqJ"}
+{"code":"346","value":"1.2343 ion. + WC","_id":"LDLgq1dxy0h6uFW1"}
+{"code":"597","value":"FFKM","_id":"LJVxro7gWgfX9vET"}
+{"code":"542","value":"ZrO2 (Mg-stab.)","_id":"LO67LJWcSjU5UxoX"}
+{"code":"398","value":"1.8550 ion.MaxitCrN","_id":"LP0ZLxFHSe25GYSe"}
+{"code":"523","value":"SIMRIZ","_id":"LXMbAGESFxFj0Le0"}
+{"code":"042","value":"DIN 1.3343 (M2 tool steel)","_id":"LipgzlxGklK3YH10"}
+{"code":"271","value":"Federstahl verzinkt","_id":"Lm8f8gV0gElTKgEm"}
+{"code":"224","value":"8 zinc","_id":"LnlsApRVCUGllxEv"}
+{"code":"220","value":"DIN 1.4112","_id":"Lucgk4e7kHYAkAKg"}
+{"code":"296","value":"1.8550+gasnitriert","_id":"LwqKfl1d3xGdNz20"}
+{"code":"420","value":"1.4571 + Tantaline","_id":"LxFU5VAxe78XFPgO"}
+{"code":"407","value":"1.4021+MaxitCrN-Mod","_id":"LxvJskD2k6tDnLpw"}
+{"code":"137","value":"Böhler M390","_id":"M2CijwVhlgdEZUZ4"}
+{"code":"243","value":"1.4301+CrC/NiCr","_id":"MB9diDFX2qUO80nY"}
+{"code":"569","value":"Gylon HP 3560","_id":"MGgMZdShNJW9ffMS"}
+{"code":"257","value":"1.4112 geh. + WC","_id":"MTDuEsVGAyOsNBr4"}
+{"code":"560","value":"Silikonbasis","_id":"MZjjqvYXi2YwcUD5"}
+{"code":"031","value":"DIN 1.4301 (304 stainless)","_id":"Mf47g2MlqZhc2upw"}
+{"code":"595","value":"Iglidur G","_id":"Mia1UctrU0fRpE1G"}
+{"code":"286","value":"DIN 1.4571 + kolst.","_id":"MriGjj11CnBbgXCX"}
+{"code":"356","value":"2.4605 + 1.4571","_id":"N2arbyX1ozXbB72p"}
+{"code":"507","value":"Zirconium oxide","_id":"N6MC7VNNwFgFCiRP"}
+{"code":"045","value":"DIN 1.7225 (41140 alloy steel)","_id":"N8RyULT5gkIATNtc"}
+{"code":"234","value":"Alu + Mineralwolle","_id":"NIDSlIeXj1XD4Mjj"}
+{"code":"547","value":"U-N blau","_id":"NJ07Gat6cMTaPBXc"}
+{"code":"537","value":"GARFITE N","_id":"NKh8WeQyirz4X2aU"}
+{"code":"397","value":"1.2379+Chromoxid+WC","_id":"NUPLRklxIj1aJpXf"}
+{"code":"213","value":"0.7040 + boriert","_id":"NWM7uAdUxehQZvjD"}
+{"code":"705","value":"DIN 2.1052 (CuSn12)","_id":"Nbo8YYm87vPankYT"}
+{"code":"056","value":"DIN 2.4617 (Hastelloy B2)","_id":"NeADA5LMZ1rNR7Ni"}
+{"code":"040","value":"GG25","_id":"NeJ4kZIgFKDVcPXk"}
+{"code":"128","value":"DIN 1.4545","_id":"Nla43BDjP4bYDhHv"}
+{"code":"320","value":"ESU-N","_id":"NvK4glN7nrNWbhse"}
+{"code":"359","value":"1.3343+CoatingK","_id":"O2YUjB6sQhOkldew"}
+{"code":"438","value":"1.4404+kaltnit+MaxCrN","_id":"O2xha7l21vSqiI9N"}
+{"code":"599","value":"ProPack S6 \"Oko\"","_id":"O5Hhy8jlIL3QeEVD"}
+{"code":"585","value":"LATTYFLON 4758","_id":"O7JEDonbpmtWhFvg"}
+{"code":"107","value":"FerroTitanitCromoni","_id":"OMnNEiVPo63pbL8e"}
+{"code":"552","value":"92 Shore A","_id":"OTQJIWPIWW3QxUZq"}
+{"code":"328","value":"6 vzk.","_id":"OgWOZgBjLSfzlBTX"}
+{"code":"567","value":"IGLIDUR W300","_id":"P9I06fjP1FrljgI4"}
+{"code":"311","value":"HC4+ Stellite","_id":"PBIPBzl6kQ3HJAZF"}
+{"code":"206","value":"5.8 zinc","_id":"PD5hei8UlcckB94G"}
+{"code":"005","value":"C45k (carbon steel)","_id":"PHso5fAZBK76vh2y"}
+{"code":"376","value":"A4+Dylyn180","_id":"PWCP3g0qoGklLttH"}
+{"code":"240","value":"Steel + 92ShA","_id":"PeDXH5nEauDNHYbH"}
+{"code":"426","value":"1.4404 + kolster.","_id":"PiXCAz59XLB2rX6I"}
+{"code":"820","value":"SiC-FDA","_id":"PkkrX2HRpRvqXrUb"}
+{"code":"812","value":"Viton-FDA","_id":"Pu1r12jPHfYgC5lz"}
+{"code":"080","value":"DIN 1.2363 (A2 tool steel)","_id":"PwHVK7yEyVUdpWX4"}
+{"code":"432","value":"1.4301+MaxitCrN-Mod","_id":"Q1Q2NAtRZnAcEZYT"}
+{"code":"517","value":"BURAGRAF 6030","_id":"Q5zKQzFzOOBmEwu9"}
+{"code":"290","value":"1.4571+Chrom","_id":"QBpBWRmVzj2m0ae6"}
+{"code":"004","value":"DIN 1.4112 (440B stainless)","_id":"QE1IMzP4DUr5G8eA"}
+{"code":"105","value":"DIN 1.7227","_id":"QGhJzC7jtVMAmrdx"}
+{"code":"083","value":"GG20","_id":"QQ9i4gg6Vm12oGKf"}
+{"code":"138","value":"DIN 1.4529","_id":"QcIjwSznxPz04lKk"}
+{"code":"588","value":"Wärmedämmplatte","_id":"QkH2Yu8vyIxMEm6d"}
+{"code":"318","value":"A4 + Ag","_id":"Qy59LZEGzSwHRkYE"}
+{"code":"370","value":"1.4112geh.+kugelstr","_id":"R0GpuhHfo64QQgAC"}
+{"code":"411","value":"1.4418 + 1.4571","_id":"R1IqColDfK39dQ8k"}
+{"code":"393","value":"1.7218 + vzk.","_id":"R5SrC2wsXgZFDmH4"}
+{"code":"339","value":"1.4539+kolst+DLC","_id":"R7paYQcLefcC0SkW"}
+{"code":"147","value":"DIN 1.4542","_id":"RIMDMCetwCb5g7XT"}
+{"code":"441","value":"1.4310+DLC","_id":"RKUrLGtGeZk0Xw4Z"}
+{"code":"536","value":"Buragraf","_id":"RQqBwnMyJU76famk"}
+{"code":"302","value":"1.4112chem.verni.","_id":"RVQPtixigOWa5y7g"}
+{"code":"437","value":"1.8550+nitr+Cr+CrN","_id":"RXrD3xc1NxH40XxZ"}
+{"code":"028","value":"DIN 1.4507 (Ferralium Alloy 255)","_id":"Rbdl46GtlplwIs7i"}
+{"code":"331","value":"1.4462 + kolst.","_id":"RvtxtS0wZFfIVvW8"}
+{"code":"379","value":"2.4610+MaxitCrN-Mod","_id":"S6c3rhPLObAe5scp"}
+{"code":"091","value":"DIN 1.4057","_id":"S6cSAYxN2Nnj9Oeb"}
+{"code":"222","value":"A3C","_id":"SFgVCCoSf2iHElLL"}
+{"code":"076","value":"DIN 1.4439 (317L stainless)","_id":"SLrkuxlmy8Pqq49D"}
+{"code":"062","value":"DIN 1.6580 (4340 alloy steel)","_id":"SPqlmYrUVDnrqSgv"}
+{"code":"039","value":"DIN 2.4610 (Hastelloy C4)","_id":"SQ8uVqIu7Iowg0ZM"}
+{"code":"502","value":"Carbon","_id":"SSMzuPbLn0FdyOoG"}
+{"code":"049","value":"Ta 2,5W","_id":"SXkzqrHKYiS6wOGo"}
+{"code":"208","value":"10 zinc","_id":"TCozljtHkXryyqmw"}
+{"code":"427","value":"1.4112 + TLS415.060","_id":"TE5dq3wXORaEQHrg"}
+{"code":"443","value":"1.2379+ionitriert+Maxit","_id":"TFd1fwcJsVcba7X5"}
+{"code":"415","value":"1.4112+Psolid+Maxit","_id":"TGuXn4L9MSt0qHu7"}
+{"code":"823","value":"TECAPEEK-PVX black","_id":"TIWslzkI6VJr6HYa"}
+{"code":"252","value":"C15 zinc","_id":"TVErR8nf3OuELuDb"}
+{"code":"233","value":"Stahl verzinkt","_id":"TpC0iqNbifbFbG52"}
+{"code":"337","value":"1.2343 ionitriert","_id":"TqI5KkYfSy73Ac6l"}
+{"code":"405","value":"1.4021 gehärtet","_id":"TypOZl2CtHnnjAjy"}
+{"code":"020","value":"DIN 0.7040","_id":"UPZvuGiqlUredmn8"}
+{"code":"509","value":"Viton","_id":"USdMmvodPibKG4zq"}
+{"code":"717","value":"Messing vernickelt","_id":"UWsEb5Z2dIzohZAu"}
+{"code":"395","value":"1.4507 + Dylyn 180","_id":"Uc2bSU96AUlcrjPb"}
+{"code":"289","value":"3.6 vzk","_id":"UchCPFGobjQhmGem"}
+{"code":"329","value":"1.4571+Inchromieren","_id":"UdtKnQOxMsnPi1Rl"}
+{"code":"145","value":"DIN 1.4307","_id":"UoNWcd3gSzeuYkyg"}
+{"code":"541","value":"GRAFIFLEX 40","_id":"VBd6RZl9FXnfAh0F"}
+{"code":"829","value":"SiC30","_id":"VDpXqInvyYV6DF2e"}
+{"code":"832","value":"PEEK + 30% Glass filled","_id":"VHghT85vedYTrVYh"}
+{"code":"089","value":"DIN 1.4112 (440B stainless)","_id":"VkgxLkrWy8sPoRaK"}
+{"code":"132","value":"DIN 1.2312","_id":"WARR1FPmAt87YU2l"}
+{"code":"036","value":"8","_id":"WFdoAkNGBHg3G435"}
+{"code":"082","value":"Recoma 28","_id":"WHtqfS37NyixPA92"}
+{"code":"122","value":"DIN 1.4108 (LC200N)","_id":"WRwFMMG9Dh2iCf0f"}
+{"code":"350","value":"1.4507 + Maxit.W-C:","_id":"Wahi1fajDbb6HCqA"}
+{"code":"225","value":"1.4401+Stell.+Carbon","_id":"WamCvXj7uGZbw2Mm"}
+{"code":"813","value":"Isatherm 6051","_id":"WmOLvU6x219nZrdt"}
+{"code":"104","value":"DIN 2.4605 (alloy 59)","_id":"WuyGtJuQWPaPTftu"}
+{"code":"578","value":"PEEK natur","_id":"Wvf1oHPx6KQV11Q0"}
+{"code":"254","value":"1.4112+Chromnitrid","_id":"X4wekdQW8LsnlOc8"}
+{"code":"365","value":"1.2344 ESU- ion.+WC","_id":"X6IMuBwrWOzVAp7a"}
+{"code":"262","value":"SiC + DLC","_id":"XElRiTUoqoqYva9p"}
+{"code":"109","value":"DIN 3.7164 (Ti6 Al 4V)","_id":"XItdTfDDh4nITU3q"}
+{"code":"434","value":"1.4404+kols.+MaxCrN","_id":"XPKuXJTrURW92Uay"}
+{"code":"324","value":"CrV-Stahl geh. ver.","_id":"XQ52H2EmhTQAetTp"}
+{"code":"584","value":"Kohlefaser 6046","_id":"XxHXcWJzQKbkox86"}
+{"code":"431","value":"1.4301kolsterisiert","_id":"XxcsWjg1g6rjlK7b"}
+{"code":"034","value":"DIN 1.4104 (430F stainless)","_id":"XyRzV6sEwWEsM0DB"}
+{"code":"072","value":"DIN 1.4435 (316L stainless)","_id":"Y1F7ImglsnBMpD6O"}
+{"code":"534","value":"Thermoflon-TR  6232","_id":"Y26ZnWaVhuIfAZx0"}
+{"code":"114","value":"CPM 10V","_id":"Y3dkc3oHF5q6EgBh"}
+{"code":"703","value":"DIN 2.0966","_id":"YBznKR8xtYluYAc1"}
+{"code":"530","value":"64 ShD-H","_id":"YKY5HI6jbiLJha5S"}
+{"code":"341","value":"1.4112 ion.+WC-Co","_id":"YNd3n7Bad3mh4Ljm"}
+{"code":"594","value":"Hartpapier, lamin.","_id":"YU7wrL3onOrlPqCk"}
+{"code":"141","value":"DIN 1.4980","_id":"YbPvbS6lShFm64QY"}
+{"code":"242","value":"1.4112+boriert","_id":"YjAD4UOXlbPXCQy8"}
+{"code":"307","value":"Messing","_id":"YmwBKjb9POOlF9Fq"}
+{"code":"319","value":"2.4600 (HB3) + TiN","_id":"YywlGvoGYvINMJXs"}
+{"code":"261","value":"1.4112 + TIN + WC","_id":"Z0qvwjbQqbtyxMm7"}
+{"code":"284","value":"Carbon + PTFE","_id":"Z6uDh6oD9d8oeq3S"}
+{"code":"073","value":"Ferro-Titanit-N128","_id":"ZE7Yy7ybtFhaLCEz"}
+{"code":"237","value":"1.4313+NiAg","_id":"ZXNGshLfVWl39wUo"}
+{"code":"093","value":"CPM 420","_id":"ZgkP56JRzW0kNVcD"}
+{"code":"094","value":"Vacumax 170","_id":"Zk9IP45sCcpDgG50"}
+{"code":"408","value":"1.4108+Maxit CrNMod","_id":"Zmbpm3G1ufUqZXCR"}
+{"code":"706","value":"Aluminium","_id":"a8fvS5t4Cujxn0G8"}
+{"code":"700","value":"Guss Alu","_id":"aN6vhOlxmnoCj5O1"}
+{"code":"548","value":"Gylon blau","_id":"aOl0ITWc33JVYVVa"}
+{"code":"299","value":"ZrO2+Dynamant","_id":"aRrQnuYqJWIg5t1e"}
+{"code":"129","value":"DIN 1.0715 (11SMn30+C)","_id":"aaY34ovbruudAcxd"}
+{"code":"075","value":"DIN 1.4404 (316L stainless)","_id":"acizcCZT8alcYiHj"}
+{"code":"344","value":"1.4112+WC-Kobalt","_id":"acyGMH0ziq3szrrs"}
+{"code":"403","value":"Ferralium+WC(LW-5)","_id":"afSy49uOtFoqaScZ"}
+{"code":"223","value":"Kalrez Comp. 4079","_id":"atepvG6goe1YVj5b"}
+{"code":"389","value":"1.4112+WC+Maxit","_id":"ayBjWlgianNLUkMK"}
+{"code":"253","value":"Steel + Bronze","_id":"azSY8jyFrmjRbvU1"}
+{"code":"332","value":"1.4507 + kols.","_id":"b73uM6l10DBDrU4U"}
+{"code":"232","value":"0.7040+boriert+NiAg","_id":"b76gjBLaRKfdNQwb"}
+{"code":"364","value":"1.7225 gasnitriert","_id":"bMvnKORkAUlX21xf"}
+{"code":"215","value":"St52-3 + Rg7","_id":"bW8iT2rDcPG8dflR"}
+{"code":"052","value":"DIN 1.2344 (H13 tool steel)","_id":"bx3jRtBGN09r8t47"}
+{"code":"828","value":"EPDM - FDA","_id":"cDF9ke6shHBXNceo"}
+{"code":"251","value":"Stahl + Ortex","_id":"cLsNcQbAxo6Xn8e1"}
+{"code":"527","value":"Thermoflon","_id":"cg0vKON1aLyaiNom"}
+{"code":"406","value":"1.3505+MaxitCrN-Mod","_id":"cjK8EyI1NEE9zEeX"}
+{"code":"429","value":"1.4112+MaxCrN-Mod","_id":"ckE7vokc2PURQSfx"}
+{"code":"589","value":"1.4541+Graphit","_id":"cm4j58E1OdT59ujG"}
+{"code":"529","value":"Chesterton 477-1","_id":"cn2RhZI1kBUGUpWO"}
+{"code":"590","value":"Style 98","_id":"d1xRHk6tf4ptmUa6"}
+{"code":"349","value":"DIN 1.4112 + Maxit + WC","_id":"d3fw53IrbAa9f7Fo"}
+{"code":"323","value":"1.4112 + Cr3O2","_id":"dCPZ792dIdi05PgQ"}
+{"code":"053","value":"DIN 1.6565 (4340 alloy steel)","_id":"dKuTmZLUCuYkEESm"}
+{"code":"123","value":"DIN 1.4108 (LC200N)","_id":"dvwuie7w1i8rdkCU"}
+{"code":"285","value":"Stahl + RAL 6011","_id":"e05qeQVYXB36NwfJ"}
+{"code":"571","value":"Glimmerlamelle","_id":"e3LPd4GVKl4Mh46H"}
+{"code":"347","value":"Stahl feuerverzinkt","_id":"e3SB9PS2XjVVxQXe"}
+{"code":"535","value":"Chemstar L 6226/L","_id":"eUEYyKTFzjKSH3Zv"}
+{"code":"017","value":"A2 (304 stainless)","_id":"eUhYGCyQEhD8DGVL"}
+{"code":"046","value":"DIN 1.4828 (309 stainless)","_id":"egdtLhMrZdotyLvb"}
+{"code":"273","value":"2.4602 (HC22)+TiN","_id":"ekTUsfkzKMJDwDN7"}
+{"code":"055","value":"DIN 1.2379 (D2 tool steel)","_id":"eltyyLiveUQPXykn"}
+{"code":"092","value":"DIN 1.7711","_id":"en4vOAHlz2coElvj"}
+{"code":"101","value":"DIN 1.6541","_id":"fC66tIwiKOfQQRWL"}
+{"code":"508","value":"Epple 33","_id":"fG4BXlYFtxiCB6fk"}
+{"code":"144","value":"DIN 1.4401","_id":"fL6SpN27gd3UWO0Z"}
+{"code":"400","value":"1.4571+MaxitCrN Mod","_id":"fRIyVoeJDOOGiz1w"}
+{"code":"425","value":"2.4610 + DLC","_id":"fY89UskT4zSP30z3"}
+{"code":"414","value":"1.4112 + Psolid","_id":"g3PtYcTg7EmYEs83"}
+{"code":"321","value":"NiAg + DLC","_id":"g6dJpU7WVePFqdBd"}
+{"code":"352","value":"DIN 1.4112 + Maxit CrN-Mod","_id":"gB6KLXkVBJhYbCeU"}
+{"code":"557","value":"Kalrez Comp. 3018","_id":"gKVQW86TNfo2OpyM"}
+{"code":"245","value":"1.0037 zinc","_id":"gSG4lQ2k9OdDk1Wt"}
+{"code":"440","value":"1.4112(200°C)+DLC","_id":"gfjvxbWO40UgLuiD"}
+{"code":"392","value":"10.9 vzk.","_id":"gipgLUZULss30jCU"}
+{"code":"250","value":"1.4112+CrC CVD","_id":"gpVmQpGLYtKbpZ7G"}
+{"code":"126","value":"DIN 1.4301","_id":"gqYIk9eTWIQVODHW"}
+{"code":"304","value":"GZN","_id":"h6r9Zv3UWu49vlJa"}
+{"code":"270","value":"DIN 1.2379 nitrided (D2 tool steel nitrided)","_id":"hEjmAbGSDzK2bYTx"}
+{"code":"322","value":"Kohle + DLC","_id":"hk5Bww82rCHO32Nm"}
+{"code":"038","value":"5.6","_id":"hqoDPXuCOPA7KCqH"}
+{"code":"822","value":"Thermoflon 6230/SL","_id":"htAQkx0DMlpAXKDj"}
+{"code":"236","value":"1.4571 + Stellite","_id":"i2sYvQ6diWMbcRS0"}
+{"code":"587","value":"ISOPLAN 750","_id":"i6FXaP9BJ1uvj10S"}
+{"code":"528","value":"Zymaxx","_id":"i78mccj1oXfVs8NA"}
+{"code":"418","value":"2.4819 + 1.4571","_id":"iACFzFm2VmaWpCM4"}
+{"code":"430","value":"2.4856+Graphit","_id":"iJbquPFTI50NOQAJ"}
+{"code":"436","value":"2.4819(HC276)+kolst","_id":"iKHK9mFtpn4gM9dj"}
+{"code":"409","value":"1.4462+kolst.+LW5","_id":"iRy65D3xmwlNGG3K"}
+{"code":"333","value":"2.4669 + Ag","_id":"iifqPsMWiMuuSvv4"}
+{"code":"520","value":"Isartherm Flex 6050","_id":"iihiz6h5kjrTquwo"}
+{"code":"298","value":"SiC+Dynamant","_id":"ikEeoa9Mh5KEvesv"}
+{"code":"258","value":"1.4539 + Cr2O3","_id":"jHoTJNQVuNG78qFS"}
+{"code":"504","value":"Carbon","_id":"jKfhI9WMpthjhDUn"}
+{"code":"255","value":"1.4112+TiCN CVD","_id":"jMrHw01rXFO2wy4k"}
+{"code":"701","value":"Nickel silver","_id":"jjHDBa0jLAJuzi6A"}
+{"code":"127","value":"DIN 1.0619","_id":"juoGDYTeQnMOoMhO"}
+{"code":"059","value":"DIN 1.4006 (410 stainless)","_id":"k1aBhKxgl4Gv7LGU"}
+{"code":"559","value":"Statotherm HT","_id":"klbTRgbjvZEHc0bb"}
+{"code":"357","value":"2.4605(alloy59)+TiN","_id":"l2kXJdFGaJrZh6Au"}
+{"code":"230","value":"federstahl verzinkt","_id":"l9F8gdUoCJ5EyvZF"}
+{"code":"248","value":"DIN 1.4112 + DLC","_id":"lCVRhEuGAjcTARkx"}
+{"code":"113","value":"DIN 1.1120 (GS 20Mn5)","_id":"lIEkvbwBQKkECaNu"}
+{"code":"231","value":"GG25 + 98 ShA","_id":"lIJmevUSIJMfzF6O"}
+{"code":"345","value":"1.2379 + ionitriert + WC","_id":"lT5byixnwU1NPmFB"}
+{"code":"713","value":"EO-Messing","_id":"lbr4DnwXhfJwyMBA"}
+{"code":"327","value":"Inconel 718 + Ag","_id":"m9cjHzmGUoixtayq"}
+{"code":"065","value":"DIN 1.1181 (C35E - QT)","_id":"mCabtdZ36aWX7Cf9"}
+{"code":"200","value":"Carbon steel","_id":"mLc6jwSRLzS5GkYo"}
+{"code":"148","value":"DIN 1.3302","_id":"mW2gYCo6No45YykW"}
+{"code":"711","value":"AlMg3 + RAL 6011","_id":"mWoVMBmey2kYiJih"}
+{"code":"021","value":"45H (steel)","_id":"maZ3w5XoHgRAYoJB"}
+{"code":"818","value":"Kalrez Spectrum7090","_id":"mgyBbCnIB9Fn2lJm"}
+{"code":"058","value":"St37.4 (carbon steel)","_id":"mkNlqv5MtSEl0pD0"}
+{"code":"272","value":"1.4112 + Cr3C2NiCr","_id":"mm2WlVAwf9hKO2Fq"}
+{"code":"067","value":"DIN 1.6562","_id":"mmx2q94L71LINd02"}
+{"code":"300","value":"2.4610 (HC4)+1.4571","_id":"mpUKY8Uhsl6bCq1G"}
+{"code":"412","value":"1.4108 ionitriert","_id":"nBLiOtvv0thbQ3UC"}
+{"code":"592","value":"Astralon","_id":"nIfkeI6BaTfxwqK2"}
+{"code":"061","value":"DIN 1.7219","_id":"nQeKulZba9V0sEES"}
+{"code":"577","value":"TECHNOX 3000 (ZrO2)","_id":"ndEv8TSMUSjNU4Jk"}
+{"code":"294","value":"1.4401 + Z600","_id":"nf06Jc2ZobGFgk5v"}
+{"code":"362","value":"1.2343+ion+MaxitCrN","_id":"nrZ1A7Yyox25GGz2"}
+{"code":"355","value":"1.2344+MaxitCrN-Mod","_id":"nvQLMPXsVi2I2IKg"}
+{"code":"512","value":"GYLON-B","_id":"o0Wx3v44u9u08xV3"}
+{"code":"024","value":"DIN 1.0402 (carbon steel)","_id":"o4gfkAyAXNppateM"}
+{"code":"428","value":"1.2343ionTLS415.060","_id":"oFoP5VtuwAIIMAba"}
+{"code":"241","value":"GG25 + 80 ShA","_id":"oHHLRpZ1EDkJ99sQ"}
+{"code":"235","value":"1.4112 ionitriert","_id":"oJk65UV9JwNFAhB1"}
+{"code":"140","value":"DIN 1.4713","_id":"oKEHxd3H1Szci1rZ"}
+{"code":"051","value":"Federstahl","_id":"oMosmQkAtOI1l8TO"}
+{"code":"417","value":"1.4404 + 1.4571","_id":"oS6KAJn4t4N7ySdU"}
+{"code":"814","value":"Kalrez comp.6375","_id":"oXvta90RONUWdtVe"}
+{"code":"422","value":"1.7711 + 3.1","_id":"odQCHC3DE9mweEXh"}
+{"code":"830","value":"SiC15","_id":"okMmcTCc1xgVJRr1"}
+{"code":"710","value":"Copper","_id":"oqXwn953cGqKAMKl"}
+{"code":"003","value":"DIN 1.4310","_id":"oreTCckwwf5tQ0Qw"}
+{"code":"205","value":"Carbon steel + NiAg","_id":"ouI8CcYRP95nSmlj"}
+{"code":"555","value":"Gylon-W","_id":"p7VTeXNPm683sYpg"}
+{"code":"143","value":"DIN 2.4856","_id":"pEgC2hdrrDBrffLR"}
+{"code":"503","value":"PTFE","_id":"pPrPoC9THI4xIyBl"}
+{"code":"035","value":"DIN 12.9","_id":"pWGMJSq6Bzp4tPPh"}
+{"code":"050","value":"Tantal (rein)","_id":"pWLBN78Rb1ZyjoCn"}
+{"code":"041","value":"Vergütungsstahl","_id":"pZf39PUDofZZJlHX"}
+{"code":"119","value":"DIN 1.2343","_id":"pdJqAmPgVCRQGgIC"}
+{"code":"139","value":"DIN 1.4021","_id":"pkNI2gf99lwu4OOA"}
+{"code":"385","value":"1.4313 + WC","_id":"priXOWNap6KLAPt4"}
+{"code":"439","value":"1.3302+DLC","_id":"pzIxxrj0v25uF0BK"}
+{"code":"574","value":"LATTYFLON 4788","_id":"q4aokO2lRNleGiAK"}
+{"code":"550","value":"Perbunan","_id":"qTift1laD53MDCC1"}
+{"code":"263","value":"A3C (St zinc)","_id":"qWJtIyhdnrc0rNGJ"}
+{"code":"531","value":"Viton / PTFE","_id":"qbJSUmAI3r4uFunb"}
+{"code":"086","value":"Stellite 21","_id":"quV9vIbDnPRraeNv"}
+{"code":"078","value":"DIN 1.3343 (M2 tool steel)","_id":"r0AOkRNWNUQEfcyM"}
+{"code":"558","value":"Acrylglas","_id":"r0ML10kgWBN6guvP"}
+{"code":"220","value":"DIN 1.4112","_id":"r0mqLWCb7eG0dhH2"}
+{"code":"068","value":"Ferro-Titanit-U","_id":"r2ALEXi1zktLFtbg"}
+{"code":"386","value":"1.2344 + Dylyn180","_id":"r3XBKITyAn6IM6Q6"}
+{"code":"019","value":"DIN 1.4303 (305 stainless)","_id":"rTRnAdQXw7t2fBdW"}
+{"code":"518","value":"Torlon","_id":"rlqnu7nuDyFFUBQH"}
+{"code":"247","value":"1.2379 + Chromoxid","_id":"rmBtF9DDhqfy4ZTL"}
+{"code":"382","value":"1.4313+MaxitCrN-Mod","_id":"rnd6t3fOOP7sTJ1i"}
+{"code":"108","value":"DIN 1.4021 (420 stainless)","_id":"rqmB296f9gyX7CQa"}
+{"code":"317","value":"2.4600 (HB3)+kolst.","_id":"s2z6rIvUduzGzej1"}
+{"code":"519","value":"Klüberplast LD","_id":"sIKJT2FZ4LR5ADpp"}
+{"code":"712","value":"Messing","_id":"sKTcgvJ7yzq037tN"}
+{"code":"360","value":"1.4313+CoatingK","_id":"sPIobpeaLuoCNF9B"}
+{"code":"008","value":"BUMA 3","_id":"sl7eUfXo8uRvJPo9"}
+{"code":"335","value":"1.4112 ion.+kugelg.","_id":"suqEjcEhjfHWPJJe"}
+{"code":"583","value":"Isolast J8325","_id":"szH8Tuk380JnCTmf"}
+{"code":"264","value":"Steel boriert","_id":"tA8AIZB2qo5l3Q31"}
+{"code":"249","value":"1.0570 + Stellite","_id":"tPQoIof07iKyC09X"}
+{"code":"522","value":"Klinger SIL C4400","_id":"tSFFXQKYkHGHklzk"}
+{"code":"391","value":"1.2344 ion. + WC","_id":"tfgud46hGkO41Cc8"}
+{"code":"343","value":"1.4112 ion.+WC-Co","_id":"tkDvJhTge7Rq0fEC"}
+{"code":"582","value":"Garlock 98i","_id":"uJebY9PCpX6HUhuW"}
+{"code":"586","value":"Garlock Style 8093","_id":"uNmxRjfVu4y28zeQ"}
+{"code":"077","value":"DIN 1.8550 (nitrided alloy steel)","_id":"uTfQtGK7Is39BG4V"}
+{"code":"354","value":"1.2344 ESU - ion.","_id":"upVLaqTuCwoAhJtS"}
+{"code":"549","value":"Silikon 70Shore A","_id":"utvx5U9lkrg7z1nG"}
+{"code":"600","value":"6225L-Burasoft","_id":"uvKVmSWd6QqDNdRF"}
+{"code":"018","value":"A4 (316 stainless)","_id":"v9TN7UnR86JZXvIt"}
+{"code":"709","value":"2.1052","_id":"vjsgyRQxamtNDsHq"}
+{"code":"421","value":"1.3343+nitr+flu CrN","_id":"vtBIKpcBNe8eUU0K"}
+{"code":"565","value":"Dichtstoff","_id":"wANjcpHFKuFgdNbb"}
+{"code":"203","value":"Carbon steel","_id":"wHQbrXn5MO7UIF8V"}
+{"code":"027","value":"DIN 1.4401 (316 stainless)","_id":"wLekISD6aK9VCCqY"}
+{"code":"525","value":"Fiber","_id":"wR8FMVoBGl9FryXD"}
+{"code":"219","value":"1.4112 + boriert","_id":"wXIs0bpULN8QLgEV"}
+{"code":"551","value":"PTFE + 25% Glas","_id":"whBjqpp4MuLA8hfg"}
+{"code":"539","value":"Isatherm 6011/B","_id":"wizxhAymyoAuYcYk"}
+{"code":"009","value":"DIN 8.8","_id":"wm9SIJxt1aHLafzB"}
+{"code":"825","value":"Frathernit SG","_id":"wn6CuNvprrkYv50s"}
+{"code":"563","value":"MAKROLON","_id":"wphpXDPrkFZ2Hn7h"}
+{"code":"351","value":"1.4112ion MaxitWCH2","_id":"xHLd68JN2rEcnqBQ"}
+{"code":"338","value":"Chrom-Vanadium","_id":"xICwh7QwWY6TVWdv"}
+{"code":"383","value":"1.0570+MaxitCrN-Mod","_id":"xJT4e99XeO2Rc98O"}
+{"code":"575","value":"M5","_id":"xMxfv8Xh091y0nOF"}
+{"code":"598","value":"Perlast G75S","_id":"xQ525IK86J4oCBuR"}
+{"code":"079","value":"DIN 1.0601 (C60)","_id":"xRfsykU0g4Aj4C2J"}
+{"code":"526","value":"Z-700 (Zirkonoxid)","_id":"xZW5MATEILqy5WnJ"}
+{"code":"416","value":"1.3343 + W-C:H","_id":"xe2MNEh17qWQ2DnM"}
+{"code":"029","value":"DIN 1.0255 (carbon steel)","_id":"xiKbdje0q1vCOtaR"}
+{"code":"824","value":"Hartglas","_id":"yCZgJYpWGqYtc1xa"}
+{"code":"275","value":"1.4539+TiN","_id":"yDQgAQGtH5OBhjsM"}
+{"code":"580","value":"Al2O3 99,7%","_id":"yJxpfq9QMkNXxyXQ"}
+{"code":"514","value":"64 Shore A","_id":"yRgojsDV2fwpgATd"}
+{"code":"384","value":"1.6582+MaxitCrN-Mod","_id":"yVZURjKZi65oUYKW"}
+{"code":"303","value":"1.4112 ion. + WC","_id":"yaPKOWf3hKrpNek0"}
+{"code":"030","value":"DIN 1.4539 (904L stainless)","_id":"ybNt9zHX8Luvghkz"}
+{"code":"142","value":"DIN 2.4668","_id":"yeq80Eean0CU9g1S"}
+{"code":"269","value":"2.4617 (HB2)+TiN","_id":"yoacPBaWruphvk63"}
+{"code":"305","value":"ZrO2 + DLC","_id":"yrHd8EH3BCaDbJ2G"}
+{"code":"226","value":"1.4507 + Cr2O3","_id":"yxD1VndxNlLnM6iz"}
+{"code":"012","value":"Aluminum + steel","_id":"yzwttfilaR9CDaFa"}
+{"code":"066","value":"DIN 1.5662","_id":"z9bOi602wJO7XIS1"}
+{"code":"309","value":"PVC","_id":"zI4lNJpWpPnR5A3j"}
+{"code":"085","value":"A4 - 70","_id":"zIfZkZ71N2C9QjMN"}
+{"code":"714","value":"Kupfer geglüht","_id":"zOYVNlF25TAHimSw"}
+{"code":"506","value":"Silicon carbide","_id":"zWB90eS2sNvrDPA1"}
+{"code":"266","value":"1.4539+Cr2O3","_id":"zbhvLc61flQRVNYL"}
+{"code":"112","value":"DIN 1.2714","_id":"zlFsX8wj4gJ8sIge"}
+{"code":"342","value":"2.4610kolsterisiert","_id":"zoRV1NEY7tgfC0DN"}
+{"code":"570","value":"Graphit 9591","_id":"zqVBu89GEIrsDduI"}
