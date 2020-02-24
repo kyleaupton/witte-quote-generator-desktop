@@ -26,7 +26,7 @@ export default {
   width: 100%;
   display: flex;
   justify-content: center;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .new-quote-preview-container {

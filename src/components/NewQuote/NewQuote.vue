@@ -18,13 +18,24 @@
     <b-form-group inline class="new-quote-input-group">
       <b-form class="new-quote-input-group-form" inline>
         <b-form-input
+          class="new-quote-input-item"
           v-model="data.quoteNum"
           placeholder="Quote Number"
           :state="quoteNumValidation"
         />
-        <b-form-input v-model="data.attention" placeholder="Attention" />
-        <b-form-input v-model="data.serialNum" placeholder="Serial Number" />
+        <b-form-input
+          class="new-quote-input-item"
+          v-model="data.serialNum"
+          placeholder="Serial Number"
+          :state="serialNumValidation"
+        />
+        <b-form-input
+          class="new-quote-input-item"
+          v-model="data.attention"
+          placeholder="Attention"
+        />
         <b-form-select
+          class="new-quote-input-item"
           v-model="selectOptions.selected"
           :options="selectOptions.options"
         />
@@ -33,18 +44,26 @@
 
     <hr class="my-4" />
 
-    <NewQuotePreview />
+    <NewQuotePreview
+      :to="data.company"
+      :att="data.attention"
+      :re="data.regarding"
+    />
 
     <hr class="my-4" />
 
     <b-form-group>
       <b-button
+        class="new-quote-button"
         @click="handelGenerate"
         variant="outline-success"
         :disabled="generateButtonValidation"
         >Generate</b-button
       >
-      <b-button @click="handleCancel" variant="outline-secondary"
+      <b-button
+        class="new-quote-button"
+        @click="handleCancel"
+        variant="outline-secondary"
         >Cancel</b-button
       >
     </b-form-group>
@@ -54,6 +73,7 @@
 <script>
 import NewQuotePreview from "./NewQuotePreview";
 import { getParts } from "@/utils/pdf";
+import { getMetaData } from "@/utils/quote";
 import fs from "fs";
 
 export default {
@@ -65,15 +85,28 @@ export default {
 
   data() {
     return {
+      initLoaded: false,
       file: null,
+
       data: {
         company: "",
-        state: "",
         attention: "",
         regarding: "",
         quoteNum: "",
         serialNum: ""
       },
+
+      masterData: {
+        errorInPath: false,
+        errorInParts: false,
+        parts: null,
+        company: null,
+        quoteNumFromPath: null,
+        quoteNumFromUser: null,
+        quoteDesc: null,
+        totalLines: null
+      },
+
       selectOptions: {
         selected: 0,
         options: [
@@ -93,6 +126,16 @@ export default {
     };
   },
 
+  watch: {
+    file() {
+      this.handleInit();
+    },
+
+    serialNumComputed() {
+      this.serialNumLogic();
+    }
+  },
+
   computed: {
     quoteNumValidation() {
       let match = this.data.quoteNum.match(/\d\dQ\d\d\dR\d{1,2}$/);
@@ -103,22 +146,22 @@ export default {
     },
 
     serialNumValidation() {
-      return this.data.quoteNum.length === 5 && !isNaN(this.data.quoteNum);
+      return (
+        (this.data.serialNum.length === 5 && !isNaN(this.data.serialNum)) ||
+        this.data.serialNum.length === 0
+      );
     },
 
     generateButtonValidation() {
-      if (this.file) {
+      if (this.file && this.quoteNumValidation) {
         return false;
       }
       return true;
-    }
-  },
+    },
 
-  created() {
-    // const dataBuffer = fs.readFileSync(this.file.path);
-    // getPdfText(dataBuffer).then(data => {
-    //   console.log(data);
-    // });
+    serialNumComputed() {
+      return this.data.serialNum;
+    }
   },
 
   methods: {
@@ -127,10 +170,45 @@ export default {
     },
 
     handelGenerate() {
+      this.masterData.quoteNumFromUser = this.data.quoteNum;
       const dataStream = fs.readFileSync(this.file.path);
-      getParts(dataStream).then(data => {
-        console.log(data);
+      getParts(dataStream, this.file.path).then(data => {
+        this.masterData.errorInParts = data.errorInParts;
+        this.masterData.parts = data.parts;
+        this.masterData.totalLines =
+          data.parts.length + this.selectOptions.selected;
+        console.log(this.masterData);
       });
+    },
+
+    handleInit() {
+      getMetaData(this.file.path).then(data => {
+        this.initLoaded = true;
+
+        this.masterData.company = data.company;
+        this.masterData.errorInPath = data.errorInPath;
+        this.masterData.quoteDesc = data.quoteDesc;
+        this.masterData.quoteNumFromPath = data.quoteNum;
+
+        this.data.company = this.masterData.company;
+        this.data.quoteNum = this.masterData.quoteNumFromPath + "R";
+        this.data.regarding = this.masterData.quoteDesc;
+
+        console.log(this.masterData);
+      });
+    },
+
+    serialNumLogic() {
+      if (
+        this.serialNumValidation &&
+        this.data.serialNum.length > 0 &&
+        this.initLoaded
+      ) {
+        this.data.regarding =
+          this.masterData.quoteDesc + " for pump " + this.data.serialNum;
+      } else {
+        this.data.regarding = this.masterData.quoteDesc;
+      }
     }
   }
 };
@@ -147,5 +225,13 @@ export default {
 
 .new-quote-input {
   margin-bottom: 12px;
+}
+
+.new-quote-input-item {
+  margin-right: 6px;
+}
+
+.new-quote-button {
+  margin-right: 6px;
 }
 </style>

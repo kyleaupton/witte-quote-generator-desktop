@@ -1,5 +1,5 @@
 const PDFJS = require("pdfjs-dist");
-const { getItem } = require("./db");
+const db = require("./db");
 
 function getPdfText(path) {
   return new Promise((resolve, reject) => {
@@ -69,7 +69,7 @@ function getPdfText(path) {
   });
 }
 
-function getParts(pdfFile) {
+function getParts(pdfFile, filePath) {
   return new Promise(async (resolve, reject) => {
     let getPdfTextPromise = new Promise((resolve, reject) => {
       getPdfText(pdfFile)
@@ -80,6 +80,10 @@ function getParts(pdfFile) {
           reject(reason);
         });
     });
+    let payload = {
+      errorInParts: false,
+      parts: null
+    };
     let pdfText = "";
     await getPdfTextPromise.then(data => {
       pdfText = data;
@@ -118,7 +122,8 @@ function getParts(pdfFile) {
           isEn: true
         },
         dePartNum: null,
-        itemPos: null
+        itemPos: null,
+        isError: false
       };
 
       // Item position
@@ -169,8 +174,9 @@ function getParts(pdfFile) {
           payload.enPartNum.partNum.length - 3,
           payload.enPartNum.partNum.length
         );
-        let getMaterialPromise = new Promise((resolve, reject) => {
-          getItem("material-code", { code: materialCode })
+
+        let materialCodePromise = new Promise((resolve, reject) => {
+          db.getItem("materials", materialCode)
             .then(data => {
               resolve(data);
             })
@@ -179,21 +185,20 @@ function getParts(pdfFile) {
             });
         });
 
-        await getMaterialPromise.then(data => {
-          if (data) {
-            if (data.value.match(/A4/g)) {
-              payload.surcharge = 1.0565;
-            }
+        await materialCodePromise
+          .then(data => {
             payload.material = data.value;
-          } else {
-            payload.material = "PLEASE FILL IN"; // Because it wasn't found in the database.
-          }
-        });
+          })
+          .catch(reason => {
+            payload.material = "PLEASE FILL IN";
+            payload.isError = true;
+          });
 
-        // Get product description (lol spelling);
+        // Get product description
         let descriptionCode = payload.enPartNum.partNum.substring(0, 3);
-        let getDescriptionPromise = new Promise((resolve, reject) => {
-          getItem("product-code", { code: descriptionCode })
+
+        let descriptionCodePromsie = new Promise((resolve, reject) => {
+          db.getItem("descriptions", descriptionCode)
             .then(data => {
               resolve(data);
             })
@@ -202,22 +207,32 @@ function getParts(pdfFile) {
             });
         });
 
-        await getDescriptionPromise.then(data => {
-          if (data) {
+        await descriptionCodePromsie
+          .then(data => {
             payload.description = data.value;
-          } else {
-            payload.description = "PLEASE FILL IN";
-          }
-        });
+          })
+          .catch(reason => {
+            payload.isError = true;
+            payload.material = "PLEASE FILL IN";
+          });
       } else {
         // This is because some parts don't have a en part number.
         payload.material = "PLEASE FILL IN";
         payload.description = "PLEASE FILL IN";
+        payload.isError = true;
       }
       parts.push(payload);
     }
 
-    resolve(parts);
+    payload.parts = parts;
+
+    for (let i = 0; i < parts.length; i++) {
+      if (parts[i].isError) {
+        payload.errorInParts = true;
+      }
+    }
+
+    resolve(payload);
   });
 }
 
