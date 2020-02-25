@@ -55,10 +55,8 @@ const fs = require("fs");
 
 // test();
 
-const { getMetaData } = require("./quote");
+const { writeXlsxFile } = require("./xlsx");
 
-getMetaData(
-  "/Users/kyleupton/Dropbox/2 - Quotes/Pactiv-Bedford Park-IL/19Q527-EXTRU 371-Cart-PS-1600 pph/Pactiv-IL-19Q527R0-EXTRU 176-PS-1100 pph.doc"
-).then(data => {
-  console.log(data);
+writeXlsxFile({
+  totalLines: 4
 });

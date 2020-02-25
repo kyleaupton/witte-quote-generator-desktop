@@ -3,9 +3,9 @@ module.exports = {
     return new Promise((resolve, reject) => {
       payload = {
         errorInPath: false,
-        company: null,
-        quoteNum: null,
-        quoteDesc: null
+        company: "",
+        quoteNum: "",
+        quoteDesc: ""
       };
 
       // Company

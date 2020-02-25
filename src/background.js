@@ -5,6 +5,11 @@ import {
   createProtocol
   /* installVueDevtools */
 } from "vue-cli-plugin-electron-builder/lib";
+const express = require("express");
+const cors = require("cors");
+const Excel = require("exceljs");
+const bodyParser = require("body-parser");
+const fs = require("fs");
 const isDevelopment = process.env.NODE_ENV !== "production";
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -75,6 +80,70 @@ app.on("ready", async () => {
     //   console.error('Vue Devtools failed to install:', e.toString())
     // }
   }
+
+  const expressApp = express();
+
+  expressApp.use(cors());
+  expressApp.use(bodyParser.urlencoded({ extended: true }));
+
+  // app.use(function(req, res, next) {
+  //   res.header("Access-Control-Allow-Origin", "*");
+  //   res.header(
+  //     "Access-Control-Allow-Headers",
+  //     "Origin, X-Requested-With, Content-Type, Accept"
+  //   );
+  //   next();
+  // });
+
+  expressApp.post("/writefile", (req, res) => {
+    let workbook = new Excel.Workbook();
+
+    let workingDirctory = req.headers.filepath.replace(/\/(?:.(?!\/))+$/g, "");
+    let outputFileName =
+      req.headers.company +
+      "-" +
+      req.headers.quotenumfromuser +
+      "-" +
+      req.headers.quotedesc +
+      ".xlsx";
+
+    let outputFilePath = workingDirctory + "/" + outputFileName;
+
+    workbook.xlsx
+      .readFile(`src/utils/spreadsheets/${req.headers.totallines}.xlsx`)
+      .then(() => {
+        let worksheet = workbook.getWorksheet(1);
+        let cell = worksheet.getCell("B8");
+        cell.value = "This is a test";
+
+        workbook.xlsx
+          .writeFile(outputFilePath)
+          .then(() => {
+            res.send({
+              exit_code: 0,
+              status: "Quote successfully created!",
+              quote_path: outputFilePath
+            });
+          })
+          .catch(reason => {
+            res.send({
+              exit_code: -1,
+              status: reason
+            });
+          });
+      })
+      .catch(reason => {
+        res.send({
+          exit_code: -1,
+          status: reason
+        });
+      });
+  });
+
+  expressApp.listen(5000, function() {
+    console.log("Example app listening on port 3000!");
+  });
+
   createWindow();
 });
 

@@ -74,7 +74,9 @@
 import NewQuotePreview from "./NewQuotePreview";
 import { getParts } from "@/utils/pdf";
 import { getMetaData } from "@/utils/quote";
+import { writeXlsxFile } from "@/utils/xlsx";
 import fs from "fs";
+import axios from "axios";
 
 export default {
   name: "NewQuote",
@@ -89,14 +91,19 @@ export default {
       file: null,
 
       data: {
+        date: "",
         company: "",
         attention: "",
         regarding: "",
         quoteNum: "",
-        serialNum: ""
+        serialNum: "",
+        quoteDescFull: ""
       },
 
       masterData: {
+        date: null,
+        attention: "",
+        regarding: null,
         errorInPath: false,
         errorInParts: false,
         parts: null,
@@ -104,7 +111,9 @@ export default {
         quoteNumFromPath: null,
         quoteNumFromUser: null,
         quoteDesc: null,
-        totalLines: null
+        quoteDescFull: null,
+        totalLines: null,
+        filePath: null
       },
 
       selectOptions: {
@@ -133,6 +142,10 @@ export default {
 
     serialNumComputed() {
       this.serialNumLogic();
+    },
+
+    quoteNumComputed() {
+      this.regardingLogic();
     }
   },
 
@@ -153,7 +166,10 @@ export default {
     },
 
     generateButtonValidation() {
-      if (this.file && this.quoteNumValidation) {
+      if (
+        (this.file && this.quoteNumValidation && this.serialNumValidation) ||
+        this.masterData.errorInPath
+      ) {
         return false;
       }
       return true;
@@ -161,6 +177,10 @@ export default {
 
     serialNumComputed() {
       return this.data.serialNum;
+    },
+
+    quoteNumComputed() {
+      return this.data.quoteNum;
     }
   },
 
@@ -178,10 +198,45 @@ export default {
         this.masterData.totalLines =
           data.parts.length + this.selectOptions.selected;
         console.log(this.masterData);
+        axios({
+          method: "post",
+          url: "http://localhost:5000/writefile",
+          headers: {
+            attention: this.masterData.attention,
+            regarding: this.masterData.regarding,
+            errorInPath: this.masterData.errorInPath,
+            errorInParts: this.masterData.errorInParts,
+            parts: this.masterData.parts,
+            company: this.masterData.company,
+            quoteNumFromPath: this.masterData.quoteNumFromPath,
+            quoteNumFromUser: this.masterData.quoteNumFromUser,
+            quoteDesc: this.masterData.quoteDesc,
+            quoteDescFull: this.masterData.quoteDescFull,
+            totalLines: this.masterData.totalLines,
+            filePath: this.masterData.filePath
+          }
+        })
+          .then(data => {
+            console.log(data);
+          })
+          .catch(reason => {
+            console.log(reason);
+          });
       });
     },
 
     handleInit() {
+      this.masterData.filePath = this.file.path;
+      let today = new Date();
+      let date =
+        today.getMonth() +
+        1 +
+        "-" +
+        today.getDate() +
+        "-" +
+        today.getFullYear();
+      this.masterData.date = date;
+      this.data.date = date;
       getMetaData(this.file.path).then(data => {
         this.initLoaded = true;
 
@@ -192,7 +247,7 @@ export default {
 
         this.data.company = this.masterData.company;
         this.data.quoteNum = this.masterData.quoteNumFromPath + "R";
-        this.data.regarding = this.masterData.quoteDesc;
+        this.data.regarding = "Witte quote " + this.data.quoteNum;
 
         console.log(this.masterData);
       });
@@ -205,11 +260,19 @@ export default {
         this.initLoaded
       ) {
         this.data.regarding =
-          this.masterData.quoteDesc + " for pump " + this.data.serialNum;
+          this.masterData.quoteDescFull + " for pump " + this.data.serialNum;
       } else {
         this.data.regarding = this.masterData.quoteDesc;
       }
-    }
+    },
+
+    regardingLogic() {
+      if (this.initLoaded) {
+        this.data.regarding = "Witte quote " + this.data.quoteNum;
+      }
+    },
+
+    getWorkingDirectory() {}
   }
 };
 </script>
