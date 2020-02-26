@@ -6,13 +6,24 @@
     "type": "git",
     "url": "https://github.com/kyleaupton/witte-quote-generator-desktop.git"
   },
+  "build": {
+    "appId": "com.electron.witte-quote-generator",
+    "mac": {
+      "category": "public.app-category.utilities",
+      "target": "dmg",
+      "darkModeSupport": false,
+      "icon": "build/icon1.icns"
+    }
+  },
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "electron:build": "vue-cli-service electron:build",
     "electron:serve": "vue-cli-service electron:serve",
     "postinstall": "electron-builder install-app-deps",
-    "postuninstall": "electron-builder install-app-deps"
+    "postuninstall": "electron-builder install-app-deps",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
   },
   "main": "background.js",
   "dependencies": {
@@ -38,6 +49,7 @@
     "@vue/cli-plugin-vuex": "~4.2.0",
     "@vue/cli-service": "~4.2.0",
     "electron": "^6.0.0",
+    "electron-builder": "^22.3.2",
     "vue-cli-plugin-electron-builder": "~1.4.5",
     "vue-template-compiler": "^2.6.11"
   }
