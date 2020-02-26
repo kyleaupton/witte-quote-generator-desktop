@@ -99,35 +99,36 @@ app.on("ready", async () => {
   // });
 
   expressApp.post("/writefile", (req, res) => {
+    let data = JSON.parse(req.headers.data);
+
     function writeParts(worksheet) {
-      let parts = JSON.parse(req.headers.parts);
       let k = 16; // Determines the row to start. We want parts and rows to increment at the same time. Therefore nested for-loop won't work.
-      for (let i = 0; i < parts.length; i++) {
+      for (let i = 0; i < data.parts.length; i++) {
         let row = worksheet.getRow(k);
 
         // Part num
         let partNumCell = row.getCell(1);
-        partNumCell.value = parts[i].enPartNum.partNum;
+        partNumCell.value = data.parts[i].enPartNum.partNum;
 
         // Description
         let descriptionCell = row.getCell(2);
-        descriptionCell.value = parts[i].description;
+        descriptionCell.value = data.parts[i].description;
 
         // Material
         let materialCell = row.getCell(3);
-        materialCell.value = parts[i].material;
+        materialCell.value = data.parts[i].material;
 
         // Qty
         let qtyCell = row.getCell(6);
-        qtyCell.value = parseInt(parts[i].qty, 10);
+        qtyCell.value = parseInt(data.parts[i].qty, 10);
 
         // German unit price
         let priceCell = row.getCell(10);
-        priceCell.value = parseFloat(parts[i].unitPrice, 10);
+        priceCell.value = parseFloat(data.parts[i].unitPrice, 10);
 
         // surcharge
         let surchargeCell = row.getCell(11);
-        surchargeCell.value = parseFloat(parts[i].surcharge, 10);
+        surchargeCell.value = parseFloat(data.parts[i].surcharge, 10);
 
         k++;
       }
@@ -136,12 +137,11 @@ app.on("ready", async () => {
     let workbook = new Excel.Workbook();
 
     workbook.xlsx
-      .readFile(`src/utils/spreadsheets/${req.headers.totallines}.xlsx`)
+      .readFile(`src/utils/spreadsheets/${data.totalLines}.xlsx`)
       .then(() => {
         let worksheet = workbook.getWorksheet(1);
 
-        if (JSON.parse(req.headers.errorinpath)) {
-          console.log("got to the wrong place");
+        if (data.errorInPath) {
           writeParts(worksheet);
           var options = {
             title: "Save file",
@@ -183,17 +183,13 @@ app.on("ready", async () => {
               console.log(reason);
             });
         } else {
-          console.log("got here");
-          let workingDirctory = req.headers.filepath.replace(
-            /\/(?:.(?!\/))+$/g,
-            ""
-          );
+          let workingDirctory = data.filePath.replace(/\/(?:.(?!\/))+$/g, "");
           let outputFileName =
-            req.headers.company +
+            data.company +
             "-" +
-            req.headers.quotenumfromuser +
+            data.quoteNumFromUser +
             "-" +
-            req.headers.quotedesc +
+            data.quoteDescFromPath +
             ".xlsx";
 
           let outputFilePath = workingDirctory + "/" + outputFileName;
@@ -204,16 +200,16 @@ app.on("ready", async () => {
           dateCell.value = new Date();
 
           let toCell = worksheet.getCell("B8");
-          toCell.value = req.headers.company;
+          toCell.value = data.company;
 
           let attCell = worksheet.getCell("B9");
-          attCell.value = req.headers.attention;
+          attCell.value = data.attention;
 
           let reCell = worksheet.getCell("B10");
-          reCell.value = req.headers.regarding;
+          reCell.value = data.regarding;
 
           let descCell = worksheet.getCell("B13");
-          descCell.value = req.headers.quotedescfull;
+          descCell.value = data.quoteDescForQuote;
 
           workbook.xlsx
             .writeFile(outputFilePath)

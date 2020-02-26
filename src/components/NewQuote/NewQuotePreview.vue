@@ -6,7 +6,7 @@
         src="@/assets/preview.png"
         height="175"
       />
-      <div class="new-quote-preview-date">{{ date }}</div>
+      <!-- <div class="new-quote-preview-date">{{ date }}</div> -->
       <div class="new-quote-preview-to">{{ to }}</div>
       <div class="new-quote-preview-att">{{ att }}</div>
       <div class="new-quote-preview-re">{{ re }}</div>
@@ -21,9 +21,7 @@
 export default {
   name: "NewQuotePreview",
 
-  created() {
-    console.log(this.desc);
-  },
+  created() {},
 
   props: ["date", "to", "att", "re", "desc"]
 };
@@ -31,6 +29,8 @@ export default {
 
 <style>
 .new-quote-preview-main {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -56,21 +56,21 @@ export default {
 .new-quote-preview-to {
   display: inline-block;
   position: absolute;
-  top: 22px;
+  top: 23px;
   left: 105px;
 }
 
 .new-quote-preview-att {
   display: inline-block;
   position: absolute;
-  top: 38.5px;
+  top: 39px;
   left: 105px;
 }
 
 .new-quote-preview-re {
   display: inline-block;
   position: absolute;
-  top: 55px;
+  top: 56px;
   left: 105px;
 }
 

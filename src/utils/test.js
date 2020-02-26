@@ -1,62 +1,10 @@
-const {
-  getItem,
-  removeItem,
-  insertItem,
-  clearCollection,
-  countCollection
-} = require("./db");
-if (typeof require !== "undefined") xlsx = require("xlsx");
 const fs = require("fs");
+const { getParts } = require("./pdf");
 
-// let db = new loki("src/utils/databases/main.db", {
-//   autoload: true,
-//   autoloadCallback: test,
-//   autosave: true,
-//   autosaveInterval: 4000
-// });
+const pdfPath = "src/utils/Quotation55419 01 190708.pdf";
 
-// function test() {
-//   let workbook = xlsx.readFile(
-//     "src/utils/spreadsheets/material-code-last-3.xlsx"
-//   );
-//   let sheet = workbook.SheetNames[0];
-//   let worksheet = workbook.Sheets[sheet];
+const dataStream = fs.readFileSync(pdfPath);
 
-//   let arr = [];
-
-//   for (let i = 1; i < 494; i++) {
-//     let cell_a = worksheet["A" + i];
-//     let cell_b = worksheet["B" + i];
-//     let value_a = cell_a ? cell_a.v : undefined;
-//     let value_b = cell_b ? cell_b.v : undefined;
-
-//     if (value_a !== undefined && value_b !== undefined) {
-//       if (typeof value_a === "number") {
-//         value_a = value_a + "";
-//       }
-//       if (typeof value_b === "number") {
-//         value_b = value_b + "";
-//       }
-//       let payload = {
-//         code: value_a,
-//         value: value_b
-//       };
-//       arr.push(payload);
-//     }
-//   }
-//   let payload = {
-//     materials: arr
-//   };
-//   fs.writeFileSync(
-//     "src/utils/databases/materials.json",
-//     JSON.stringify(payload)
-//   );
-// }
-
-// test();
-
-const { writeXlsxFile } = require("./xlsx");
-
-writeXlsxFile({
-  totalLines: 4
+getParts(dataStream, pdfPath).then(data => {
+  console.log(data);
 });

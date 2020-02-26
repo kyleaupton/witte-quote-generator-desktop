@@ -44,7 +44,6 @@ function getPdfText(path) {
     PDFJS.getDocument(path).then(
       async function(PDFDocumentInstance) {
         var totalPages = PDFDocumentInstance.numPages;
-        var pageNumber = 1;
 
         for (let i = 1; i <= totalPages; i++) {
           let getPagePromise = new Promise((resolve, reject) => {
@@ -84,17 +83,38 @@ function getParts(pdfFile, filePath) {
     });
 
     // Promise to get metadata from file path, this is also returned in payload.
-    // let getPdfMetaData = new Promise((resolve, reject) => {
-    //   getMetaData()
-    // });
+    let getPdfMetaData = new Promise((resolve, reject) => {
+      getMetaData(filePath)
+        .then(data => {
+          resolve(data);
+        })
+        .catch(reason => {
+          reject(reason);
+        });
+    });
+
     let payload = {
+      errorInPath: false,
       errorInParts: false,
-      parts: null
+      parts: null,
+      company: "",
+      quoteNumFromPath: "",
+      quoteDescFromPath: ""
     };
+
     let pdfText = "";
+
     await getPdfTextPromise.then(data => {
       pdfText = data;
     });
+
+    await getPdfMetaData.then(data => {
+      payload.errorInPath = data.errorInPath;
+      payload.company = data.company;
+      payload.quoteNumFromPath = data.quoteNumFromPath;
+      payload.quoteDescFromPath = data.quoteDescFromPath;
+    });
+
     let parts = [];
 
     // if (debug) {

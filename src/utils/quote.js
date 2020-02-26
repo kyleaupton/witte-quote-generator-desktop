@@ -4,8 +4,8 @@ module.exports = {
       payload = {
         errorInPath: false,
         company: "",
-        quoteNum: "",
-        quoteDesc: ""
+        quoteNumFromPath: "",
+        quoteDescFromPath: ""
       };
 
       // Company
@@ -21,13 +21,13 @@ module.exports = {
 
       // Quote number
       let quoteNum = filePath.match(/\d{2}Q\d{3}/g);
-      payload.quoteNum = quoteNum[0];
+      payload.quoteNumFromPath = quoteNum[0];
 
       // Quote description
       let quoteDesc = filePath.match(/\d{2}Q\d{3}.*?\//g);
-      quoteDesc[0] = quoteDesc[0].replace(payload.quoteNum + "-", "");
+      quoteDesc[0] = quoteDesc[0].replace(payload.quoteNumFromPath + "-", "");
       quoteDesc[0] = quoteDesc[0].replace("/", "");
-      payload.quoteDesc = quoteDesc[0];
+      payload.quoteDescFromPath = quoteDesc[0];
 
       resolve(payload);
     });

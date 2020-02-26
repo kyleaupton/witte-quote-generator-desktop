@@ -19,40 +19,52 @@
       <b-form class="new-quote-input-group-form" inline>
         <b-form-input
           class="new-quote-input-item"
-          v-model="data.quoteNum"
+          v-model="masterData.quoteNumFromUser"
           placeholder="Quote Number"
           :state="quoteNumValidation"
           :disabled="masterData.errorInPath"
         />
         <b-form-input
           class="new-quote-input-item"
-          v-model="data.serialNum"
+          v-model="masterData.serialNum"
           placeholder="Serial Number"
           :state="serialNumValidation"
           :disabled="masterData.errorInPath"
         />
         <b-form-input
           class="new-quote-input-item"
-          v-model="data.attention"
+          v-model="masterData.attention"
           placeholder="Attention"
           :disabled="masterData.errorInPath"
         />
         <b-form-select
+          id="new-quote-extra-line"
           class="new-quote-input-item"
           v-model="selectOptions.selected"
           :options="selectOptions.options"
+          :state="!errorInTotalLines"
         />
+        <b-popover
+          v-if="errorInTotalLines && initLoaded"
+          target="new-quote-extra-line"
+          triggers="hover"
+          placement="bottom"
+        >
+          <template v-slot:title>Uh oh!</template>
+          The maximum number of total lines supported is 25, please choose
+          {{ 25 - masterData.parts.length }} lines or less.
+        </b-popover>
       </b-form>
     </b-form-group>
 
     <hr class="my-4" />
 
     <NewQuotePreview
-      :date="data.date"
-      :to="data.company"
-      :att="data.attention"
-      :re="data.regarding"
-      :desc="data.quoteDescFull"
+      date="This is a test"
+      :to="masterData.company"
+      :att="masterData.attention"
+      :re="masterData.regarding"
+      :desc="masterData.quoteDescForQuote"
     />
 
     <hr class="my-4" />
@@ -109,19 +121,9 @@ export default {
     return {
       initLoaded: false,
       file: null,
-
-      data: {
-        date: "",
-        company: "",
-        attention: "",
-        regarding: "",
-        quoteNum: "",
-        serialNum: "",
-        quoteDescFull: ""
-      },
+      errorInTotalLines: false,
 
       masterData: {
-        date: "",
         attention: "",
         regarding: "",
         errorInPath: false,
@@ -130,9 +132,10 @@ export default {
         company: "",
         quoteNumFromPath: "",
         quoteNumFromUser: "",
-        quoteDesc: "",
-        quoteDescFull: "",
-        totalLines: "",
+        quoteDescFromPath: "",
+        quoteDescForQuote: "",
+        serialNum: "",
+        totalLines: 0,
         filePath: ""
       },
 
@@ -155,6 +158,8 @@ export default {
     };
   },
 
+  created() {},
+
   watch: {
     file() {
       this.handleInit();
@@ -166,12 +171,18 @@ export default {
 
     quoteNumComputed() {
       this.regardingLogic();
+    },
+
+    extraLinesComputed() {
+      this.extraLinesLogic();
     }
   },
 
   computed: {
     quoteNumValidation() {
-      let match = this.data.quoteNum.match(/\d\dQ\d\d\dR\d{1,2}$/);
+      let match = this.masterData.quoteNumFromUser.match(
+        /\d\dQ\d\d\dR\d{1,2}$/
+      );
       if (match) {
         return true;
       }
@@ -180,15 +191,19 @@ export default {
 
     serialNumValidation() {
       return (
-        (this.data.serialNum.length === 5 && !isNaN(this.data.serialNum)) ||
-        this.data.serialNum.length === 0
+        (this.masterData.serialNum.length === 5 &&
+          !isNaN(this.masterData.serialNum)) ||
+        this.masterData.serialNum.length === 0
       );
     },
 
     generateButtonValidation() {
       if (
-        (this.file && this.quoteNumValidation && this.serialNumValidation) ||
-        this.masterData.errorInPath
+        (this.file &&
+          this.quoteNumValidation &&
+          this.serialNumValidation &&
+          !this.errorInTotalLines) ||
+        (this.masterData.errorInPath && !this.errorInTotalLines)
       ) {
         return false;
       }
@@ -196,109 +211,88 @@ export default {
     },
 
     serialNumComputed() {
-      return this.data.serialNum;
+      return this.masterData.serialNum;
     },
 
     quoteNumComputed() {
-      return this.data.quoteNum;
+      return this.masterData.quoteNumFromUser;
+    },
+
+    extraLinesComputed() {
+      return this.selectOptions.selected;
     }
   },
 
   methods: {
-    handleCancel() {
-      this.$router.push("/");
+    handleInit() {
+      const dataStream = fs.readFileSync(this.file.path);
+      this.masterData.filePath = this.file.path;
+      getParts(dataStream, this.file.path).then(data => {
+        this.initLoaded = true;
+
+        this.masterData.errorInPath = data.errorInPath;
+        this.masterData.errorInParts = data.errorInParts;
+
+        this.masterData.parts = data.parts;
+        this.masterData.totalLines = data.parts.length;
+
+        this.masterData.company = data.company;
+
+        this.masterData.quoteNumFromPath = data.quoteNumFromPath;
+        this.masterData.quoteNumFromUser = data.quoteNumFromPath + "R";
+
+        this.masterData.quoteDescFromPath = data.quoteDescFromPath;
+        this.masterData.quoteDescForQuote = data.quoteDescFromPath;
+      });
     },
 
     handelGenerate() {
-      this.masterData.quoteNumFromUser = this.data.quoteNum;
-      const dataStream = fs.readFileSync(this.file.path);
-      getParts(dataStream, this.file.path).then(data => {
-        this.masterData.errorInParts = data.errorInParts;
-        this.masterData.parts = data.parts;
-        this.masterData.totalLines =
-          data.parts.length + this.selectOptions.selected;
-        this.masterData.quoteDescFull = this.data.quoteDescFull;
-        console.log(this.masterData.parts);
-        axios({
-          method: "post",
-          url: "http://localhost:5000/writefile",
-          headers: {
-            attention: this.masterData.attention,
-            regarding: this.masterData.regarding,
-            errorInPath: this.masterData.errorInPath,
-            errorInParts: this.masterData.errorInParts,
-            parts: JSON.stringify(this.masterData.parts),
-            company: this.masterData.company,
-            quoteNumFromPath: this.masterData.quoteNumFromPath,
-            quoteNumFromUser: this.masterData.quoteNumFromUser,
-            quoteDesc: this.masterData.quoteDesc,
-            quoteDescFull: this.masterData.quoteDescFull,
-            totalLines: this.masterData.totalLines,
-            filePath: this.masterData.filePath
-          }
+      axios({
+        method: "post",
+        url: "http://localhost:5000/writefile",
+        headers: {
+          data: JSON.stringify(this.masterData)
+        }
+      })
+        .then(data => {
+          console.log(data);
         })
-          .then(data => {
-            console.log(data);
-          })
-          .catch(reason => {
-            console.log(reason);
-          });
-      });
+        .catch(reason => {
+          console.log(reason);
+        });
     },
 
-    handleInit() {
-      this.masterData.filePath = this.file.path;
-      getMetaData(this.file.path).then(data => {
-        this.initLoaded = true;
-
-        if (data.errorInPath) {
-          this.$bvModal.show("bv-modal-example");
-        }
-
-        this.masterData.company = data.company;
-        this.masterData.errorInPath = data.errorInPath;
-        this.masterData.quoteDesc = data.quoteDesc;
-        this.masterData.quoteDescFull = data.quoteDesc;
-        this.masterData.quoteNumFromPath = data.quoteNum;
-
-        if (!data.errorInPath) {
-          this.data.company = this.masterData.company;
-          this.data.quoteNum = this.masterData.quoteNumFromPath + "R";
-          this.masterData.regarding = "Witte quote " + this.data.quoteNum;
-          this.data.regarding = "Witte quote " + this.data.quoteNum;
-          this.data.quoteDescFull = this.masterData.quoteDesc;
-          let today = new Date();
-          let date =
-            today.getMonth() +
-            1 +
-            "-" +
-            today.getDate() +
-            "-" +
-            today.getFullYear();
-          this.masterData.date = date;
-          this.data.date = date;
-        }
-
-        console.log(this.masterData);
-      });
+    handleCancel() {
+      this.$router.push("/");
     },
 
     serialNumLogic() {
       if (
         this.serialNumValidation &&
-        this.data.serialNum.length > 0 &&
+        this.masterData.serialNum.length > 0 &&
         this.initLoaded
       ) {
-        this.data.quoteDescFull =
-          this.masterData.quoteDescFull + " for pump " + this.data.serialNum;
+        this.masterData.quoteDescForQuote =
+          this.masterData.quoteDescFromPath +
+          " for pump " +
+          this.masterData.serialNum;
       } else {
-        this.data.quoteDescFull = this.masterData.quoteDescFull;
+        this.masterData.quoteDescForQuote = this.masterData.quoteDescFromPath;
       }
     },
 
     regardingLogic() {
       if (this.initLoaded) {
-        this.data.regarding = "Witte quote " + this.data.quoteNum;
+        this.masterData.regarding =
+          "Witte quote " + this.masterData.quoteNumFromUser;
+      }
+    },
+
+    extraLinesLogic() {
+      if (this.masterData.totalLines + this.selectOptions.selected > 25) {
+        this.errorInTotalLines = true;
+      } else {
+        this.errorInTotalLines = false;
       }
     },
 
