@@ -6,10 +6,13 @@
         src="@/assets/preview.png"
         height="175"
       />
-      <div class="new-quote-preview-date">test</div>
+      <div class="new-quote-preview-date">{{ date }}</div>
       <div class="new-quote-preview-to">{{ to }}</div>
       <div class="new-quote-preview-att">{{ att }}</div>
       <div class="new-quote-preview-re">{{ re }}</div>
+      <div class="new-quote-preview-desc">
+        <div class="test-test">{{ desc }}</div>
+      </div>
     </div>
   </div>
 </template>
@@ -17,7 +20,12 @@
 <script>
 export default {
   name: "NewQuotePreview",
-  props: ["to", "att", "re"]
+
+  created() {
+    console.log(this.desc);
+  },
+
+  props: ["date", "to", "att", "re", "desc"]
 };
 </script>
 
@@ -64,5 +72,22 @@ export default {
   position: absolute;
   top: 55px;
   left: 105px;
+}
+
+.new-quote-preview-desc {
+  /* background-color: aquamarine; */
+  text-align: center;
+  position: absolute;
+  top: 97px;
+  left: 100px;
+  width: 232px;
+  /* border-style: solid;
+  border-width: 1px;
+  border-color: black; */
+}
+
+.test-test {
+  display: inline-block;
+  /* background-color: aqua; */
 }
 </style>

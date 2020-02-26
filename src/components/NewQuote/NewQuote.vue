@@ -22,17 +22,20 @@
           v-model="data.quoteNum"
           placeholder="Quote Number"
           :state="quoteNumValidation"
+          :disabled="masterData.errorInPath"
         />
         <b-form-input
           class="new-quote-input-item"
           v-model="data.serialNum"
           placeholder="Serial Number"
           :state="serialNumValidation"
+          :disabled="masterData.errorInPath"
         />
         <b-form-input
           class="new-quote-input-item"
           v-model="data.attention"
           placeholder="Attention"
+          :disabled="masterData.errorInPath"
         />
         <b-form-select
           class="new-quote-input-item"
@@ -45,9 +48,11 @@
     <hr class="my-4" />
 
     <NewQuotePreview
+      :date="data.date"
       :to="data.company"
       :att="data.attention"
       :re="data.regarding"
+      :desc="data.quoteDescFull"
     />
 
     <hr class="my-4" />
@@ -67,6 +72,21 @@
         >Cancel</b-button
       >
     </b-form-group>
+
+    <b-modal id="bv-modal-example" hide-footer>
+      <template v-slot:modal-title>
+        Uh oh!
+      </template>
+      <div class="d-block text-center">
+        <p>
+          Looks like there's an error in pdf file's path. Please check the path
+          and try again.
+        </p>
+      </div>
+      <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-example')"
+        >Close</b-button
+      >
+    </b-modal>
   </div>
 </template>
 
@@ -101,19 +121,19 @@ export default {
       },
 
       masterData: {
-        date: null,
+        date: "",
         attention: "",
-        regarding: null,
+        regarding: "",
         errorInPath: false,
         errorInParts: false,
         parts: null,
-        company: null,
-        quoteNumFromPath: null,
-        quoteNumFromUser: null,
-        quoteDesc: null,
-        quoteDescFull: null,
-        totalLines: null,
-        filePath: null
+        company: "",
+        quoteNumFromPath: "",
+        quoteNumFromUser: "",
+        quoteDesc: "",
+        quoteDescFull: "",
+        totalLines: "",
+        filePath: ""
       },
 
       selectOptions: {
@@ -227,27 +247,35 @@ export default {
 
     handleInit() {
       this.masterData.filePath = this.file.path;
-      let today = new Date();
-      let date =
-        today.getMonth() +
-        1 +
-        "-" +
-        today.getDate() +
-        "-" +
-        today.getFullYear();
-      this.masterData.date = date;
-      this.data.date = date;
       getMetaData(this.file.path).then(data => {
         this.initLoaded = true;
+
+        if (data.errorInPath) {
+          this.$bvModal.show("bv-modal-example");
+        }
 
         this.masterData.company = data.company;
         this.masterData.errorInPath = data.errorInPath;
         this.masterData.quoteDesc = data.quoteDesc;
+        this.masterData.quoteDescFull = data.quoteDesc;
         this.masterData.quoteNumFromPath = data.quoteNum;
 
-        this.data.company = this.masterData.company;
-        this.data.quoteNum = this.masterData.quoteNumFromPath + "R";
-        this.data.regarding = "Witte quote " + this.data.quoteNum;
+        if (!data.errorInPath) {
+          this.data.company = this.masterData.company;
+          this.data.quoteNum = this.masterData.quoteNumFromPath + "R";
+          this.data.regarding = "Witte quote " + this.data.quoteNum;
+          this.data.quoteDescFull = this.masterData.quoteDesc;
+          let today = new Date();
+          let date =
+            today.getMonth() +
+            1 +
+            "-" +
+            today.getDate() +
+            "-" +
+            today.getFullYear();
+          this.masterData.date = date;
+          this.data.date = date;
+        }
 
         console.log(this.masterData);
       });
@@ -259,10 +287,10 @@ export default {
         this.data.serialNum.length > 0 &&
         this.initLoaded
       ) {
-        this.data.regarding =
+        this.data.quoteDescFull =
           this.masterData.quoteDescFull + " for pump " + this.data.serialNum;
       } else {
-        this.data.regarding = this.masterData.quoteDesc;
+        this.data.quoteDescFull = this.masterData.quoteDescFull;
       }
     },
 
