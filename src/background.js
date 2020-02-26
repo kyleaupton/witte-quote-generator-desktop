@@ -11,6 +11,9 @@ const Excel = require("exceljs");
 const bodyParser = require("body-parser");
 const fs = require("fs");
 const isDevelopment = process.env.NODE_ENV !== "production";
+const { dialog } = require("electron");
+
+require("update-electron-app")();
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -96,52 +99,151 @@ app.on("ready", async () => {
   // });
 
   expressApp.post("/writefile", (req, res) => {
+    function writeParts(worksheet) {
+      let parts = JSON.parse(req.headers.parts);
+      let k = 16; // Determines the row to start. We want parts and rows to increment at the same time. Therefore nested for-loop won't work.
+      for (let i = 0; i < parts.length; i++) {
+        let row = worksheet.getRow(k);
+
+        // Part num
+        let partNumCell = row.getCell(1);
+        partNumCell.value = parts[i].enPartNum.partNum;
+
+        // Description
+        let descriptionCell = row.getCell(2);
+        descriptionCell.value = parts[i].description;
+
+        // Material
+        let materialCell = row.getCell(3);
+        materialCell.value = parts[i].material;
+
+        // Qty
+        let qtyCell = row.getCell(6);
+        qtyCell.value = parseInt(parts[i].qty, 10);
+
+        // German unit price
+        let priceCell = row.getCell(10);
+        priceCell.value = parseFloat(parts[i].unitPrice, 10);
+
+        // surcharge
+        let surchargeCell = row.getCell(11);
+        surchargeCell.value = parseFloat(parts[i].surcharge, 10);
+
+        k++;
+      }
+    }
+
     let workbook = new Excel.Workbook();
-
-    let workingDirctory = req.headers.filepath.replace(/\/(?:.(?!\/))+$/g, "");
-    let outputFileName =
-      req.headers.company +
-      "-" +
-      req.headers.quotenumfromuser +
-      "-" +
-      req.headers.quotedesc +
-      ".xlsx";
-
-    let outputFilePath = workingDirctory + "/" + outputFileName;
 
     workbook.xlsx
       .readFile(`src/utils/spreadsheets/${req.headers.totallines}.xlsx`)
       .then(() => {
         let worksheet = workbook.getWorksheet(1);
-        let cell = worksheet.getCell("B8");
-        cell.value = "This is a test";
 
-        workbook.xlsx
-          .writeFile(outputFilePath)
-          .then(() => {
-            res.send({
-              exit_code: 0,
-              status: "Quote successfully created!",
-              quote_path: outputFilePath
+        if (JSON.parse(req.headers.errorinpath)) {
+          console.log("got to the wrong place");
+          writeParts(worksheet);
+          var options = {
+            title: "Save file",
+            defaultPath: "quote_filename",
+            buttonLabel: "Save",
+            filters: [{ name: "*.xlsx", extensions: ["xlsx"] }]
+          };
+
+          dialog
+            .showSaveDialog(null, options)
+            .then(result => {
+              let filename = result.filePath;
+              workbook.xlsx
+                .writeBuffer()
+                .then(buffer => {
+                  fs.writeFileSync(filename, buffer);
+                  res.send({
+                    exit_code: 0,
+                    status: "Quote successfully created!",
+                    quote_path: filename,
+                    parts: req.headers.parts
+                  });
+                })
+                .catch(reason => {
+                  res.send({
+                    exit_code: -2,
+                    status: "Error",
+                    message: reason
+                  });
+                  console.log(reason);
+                });
+            })
+            .catch(reason => {
+              res.send({
+                exit_code: -2,
+                status: "Error",
+                message: reason
+              });
+              console.log(reason);
             });
-          })
-          .catch(reason => {
-            res.send({
-              exit_code: -1,
-              status: reason
+        } else {
+          console.log("got here");
+          let workingDirctory = req.headers.filepath.replace(
+            /\/(?:.(?!\/))+$/g,
+            ""
+          );
+          let outputFileName =
+            req.headers.company +
+            "-" +
+            req.headers.quotenumfromuser +
+            "-" +
+            req.headers.quotedesc +
+            ".xlsx";
+
+          let outputFilePath = workingDirctory + "/" + outputFileName;
+
+          writeParts(worksheet);
+
+          let dateCell = worksheet.getCell("B7");
+          dateCell.value = new Date();
+
+          let toCell = worksheet.getCell("B8");
+          toCell.value = req.headers.company;
+
+          let attCell = worksheet.getCell("B9");
+          attCell.value = req.headers.attention;
+
+          let reCell = worksheet.getCell("B10");
+          reCell.value = req.headers.regarding;
+
+          let descCell = worksheet.getCell("B13");
+          descCell.value = req.headers.quotedescfull;
+
+          workbook.xlsx
+            .writeFile(outputFilePath)
+            .then(() => {
+              res.send({
+                exit_code: 0,
+                status: "Quote successfully created!",
+                quote_path: outputFilePath
+              });
+            })
+            .catch(reason => {
+              res.send({
+                exit_code: -1,
+                status: reason
+              });
+              console.log(reason);
             });
-          });
+        }
       })
       .catch(reason => {
         res.send({
           exit_code: -1,
           status: reason
         });
+        console.log(reason);
       });
   });
 
   expressApp.listen(5000, function() {
-    console.log("Example app listening on port 3000!");
+    console.log("Rest api listening on port 5000.");
   });
 
   createWindow();

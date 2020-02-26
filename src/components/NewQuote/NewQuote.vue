@@ -217,7 +217,8 @@ export default {
         this.masterData.parts = data.parts;
         this.masterData.totalLines =
           data.parts.length + this.selectOptions.selected;
-        console.log(this.masterData);
+        this.masterData.quoteDescFull = this.data.quoteDescFull;
+        console.log(this.masterData.parts);
         axios({
           method: "post",
           url: "http://localhost:5000/writefile",
@@ -226,7 +227,7 @@ export default {
             regarding: this.masterData.regarding,
             errorInPath: this.masterData.errorInPath,
             errorInParts: this.masterData.errorInParts,
-            parts: this.masterData.parts,
+            parts: JSON.stringify(this.masterData.parts),
             company: this.masterData.company,
             quoteNumFromPath: this.masterData.quoteNumFromPath,
             quoteNumFromUser: this.masterData.quoteNumFromUser,
@@ -263,6 +264,7 @@ export default {
         if (!data.errorInPath) {
           this.data.company = this.masterData.company;
           this.data.quoteNum = this.masterData.quoteNumFromPath + "R";
+          this.masterData.regarding = "Witte quote " + this.data.quoteNum;
           this.data.regarding = "Witte quote " + this.data.quoteNum;
           this.data.quoteDescFull = this.masterData.quoteDesc;
           let today = new Date();

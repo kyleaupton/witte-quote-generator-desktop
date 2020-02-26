@@ -1,5 +1,6 @@
 const PDFJS = require("pdfjs-dist");
 const db = require("./db");
+const { getMetaData } = require("./quote");
 
 function getPdfText(path) {
   return new Promise((resolve, reject) => {
@@ -71,6 +72,7 @@ function getPdfText(path) {
 
 function getParts(pdfFile, filePath) {
   return new Promise(async (resolve, reject) => {
+    // Promise to get text from pdf
     let getPdfTextPromise = new Promise((resolve, reject) => {
       getPdfText(pdfFile)
         .then(data => {
@@ -80,6 +82,11 @@ function getParts(pdfFile, filePath) {
           reject(reason);
         });
     });
+
+    // Promise to get metadata from file path, this is also returned in payload.
+    // let getPdfMetaData = new Promise((resolve, reject) => {
+    //   getMetaData()
+    // });
     let payload = {
       errorInParts: false,
       parts: null
