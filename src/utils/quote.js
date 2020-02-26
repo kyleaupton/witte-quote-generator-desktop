@@ -1,7 +1,7 @@
 module.exports = {
   getMetaData: filePath => {
     return new Promise((resolve, reject) => {
-      payload = {
+      let payload = {
         errorInPath: false,
         company: "",
         quoteNumFromPath: "",

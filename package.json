@@ -6,15 +6,6 @@
     "type": "git",
     "url": "https://github.com/kyleaupton/witte-quote-generator-desktop.git"
   },
-  "build": {
-    "appId": "com.electron.witte-quote-generator",
-    "mac": {
-      "category": "public.app-category.utilities",
-      "target": "dmg",
-      "darkModeSupport": false,
-      "icon": "build/icons/icon.icns"
-    }
-  },
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
