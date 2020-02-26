@@ -12,7 +12,7 @@
       "category": "public.app-category.utilities",
       "target": "dmg",
       "darkModeSupport": false,
-      "icon": "build/icon.icns"
+      "icon": "build/icons/icon.icns"
     }
   },
   "scripts": {
