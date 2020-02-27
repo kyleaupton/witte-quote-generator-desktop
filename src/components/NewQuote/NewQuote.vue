@@ -225,10 +225,15 @@ export default {
 
   methods: {
     handleInit() {
+      this.resetData();
       const dataStream = fs.readFileSync(this.file.path);
       this.masterData.filePath = this.file.path;
       getParts(dataStream, this.file.path).then(data => {
         this.initLoaded = true;
+
+        if (data.errorInPath) {
+          this.$bvModal.show("bv-modal-example");
+        }
 
         this.masterData.errorInPath = data.errorInPath;
         this.masterData.errorInParts = data.errorInParts;
@@ -258,9 +263,11 @@ export default {
       })
         .then(data => {
           console.log(data.data);
+          this.makeToast(data.data);
         })
         .catch(reason => {
           console.log(reason.data);
+          this.makeToast(data.data);
         });
     },
 
@@ -284,7 +291,7 @@ export default {
     },
 
     regardingLogic() {
-      if (this.initLoaded) {
+      if (this.initLoaded && !this.masterData.errorInPath) {
         this.masterData.regarding =
           "Witte quote " + this.masterData.quoteNumFromUser;
       }
@@ -298,7 +305,34 @@ export default {
       }
     },
 
-    getWorkingDirectory() {}
+    resetData() {
+      this.initLoaded = false;
+      let temp = {
+        attention: "",
+        regarding: "",
+        errorInPath: false,
+        errorInParts: false,
+        parts: null,
+        company: "",
+        quoteNumFromPath: "",
+        quoteNumFromUser: "",
+        quoteDescFromPath: "",
+        quoteDescForQuote: "",
+        serialNum: "",
+        totalLines: 0,
+        filePath: ""
+      };
+      this.masterData = temp;
+    },
+
+    makeToast(data) {
+      this.$bvToast.toast(data.message, {
+        title: !data.exit_code ? "Success!" : "Uh oh!",
+        variant: !data.exit_code ? "success" : "danger",
+        solid: true,
+        toaster: "b-toaster-bottom-full"
+      });
+    }
   }
 };
 </script>

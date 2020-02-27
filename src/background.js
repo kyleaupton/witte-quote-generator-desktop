@@ -10,6 +10,7 @@ const cors = require("cors");
 const Excel = require("exceljs");
 const bodyParser = require("body-parser");
 const fs = require("fs");
+const path = require("path");
 const isDevelopment = process.env.NODE_ENV !== "production";
 const { dialog } = require("electron");
 
@@ -89,159 +90,158 @@ app.on("ready", async () => {
   expressApp.use(cors());
   expressApp.use(bodyParser.urlencoded({ extended: true }));
 
-  // app.use(function(req, res, next) {
-  //   res.header("Access-Control-Allow-Origin", "*");
-  //   res.header(
-  //     "Access-Control-Allow-Headers",
-  //     "Origin, X-Requested-With, Content-Type, Accept"
-  //   );
-  //   next();
-  // });
-
   expressApp.post("/writefile", (req, res) => {
-    res.send({
-      directory: fs.readdirSync(__dirname)
-    });
-    // let data = JSON.parse(req.headers.data);
-    // let log = "";
+    let data = JSON.parse(req.headers.data);
+    let log = "";
 
-    // function writeParts(worksheet) {
-    //   let k = 16; // Determines the row to start. We want parts and rows to increment at the same time. Therefore nested for-loop won't work.
-    //   for (let i = 0; i < data.parts.length; i++) {
-    //     let row = worksheet.getRow(k);
+    function writeParts(worksheet) {
+      let k = 16; // Determines the row to start. We want parts and rows to increment at the same time. Therefore nested for-loop won't work.
+      for (let i = 0; i < data.parts.length; i++) {
+        let row = worksheet.getRow(k);
 
-    //     // Part num
-    //     let partNumCell = row.getCell(1);
-    //     partNumCell.value = data.parts[i].enPartNum.partNum;
+        // Part num
+        let partNumCell = row.getCell(1);
+        partNumCell.value = data.parts[i].enPartNum.partNum;
 
-    //     // Description
-    //     let descriptionCell = row.getCell(2);
-    //     descriptionCell.value = data.parts[i].description;
+        // Description
+        let descriptionCell = row.getCell(2);
+        descriptionCell.value = data.parts[i].description;
 
-    //     // Material
-    //     let materialCell = row.getCell(3);
-    //     materialCell.value = data.parts[i].material;
+        // Material
+        let materialCell = row.getCell(3);
+        materialCell.value = data.parts[i].material;
 
-    //     // Qty
-    //     let qtyCell = row.getCell(6);
-    //     qtyCell.value = parseInt(data.parts[i].qty, 10);
+        // Qty
+        let qtyCell = row.getCell(6);
+        qtyCell.value = parseInt(data.parts[i].qty, 10);
 
-    //     // German unit price
-    //     let priceCell = row.getCell(10);
-    //     priceCell.value = parseFloat(data.parts[i].unitPrice, 10);
+        // German unit price
+        let priceCell = row.getCell(10);
+        priceCell.value = parseFloat(data.parts[i].unitPrice, 10);
 
-    //     // surcharge
-    //     let surchargeCell = row.getCell(11);
-    //     surchargeCell.value = parseFloat(data.parts[i].surcharge, 10);
+        // surcharge
+        let surchargeCell = row.getCell(11);
+        surchargeCell.value = parseFloat(data.parts[i].surcharge, 10);
 
-    //     k++;
-    //   }
-    // }
+        k++;
+      }
+    }
 
-    // let workbook = new Excel.Workbook();
+    let workbook = new Excel.Workbook();
 
-    // workbook.xlsx
-    //   .readFile(`${__dirname}/utils/spreadsheets/${data.totalLines}.xlsx`)
-    //   .then(() => {
-    //     let worksheet = workbook.getWorksheet(1);
+    let templatePath = "";
+    if (isDevelopment) {
+      templatePath = `src/utils/spreadsheets/${data.totalLines}.xlsx`;
+    } else {
+      templatePath = path.join(
+        path.dirname(__dirname),
+        "resources",
+        "spreadsheets",
+        `${data.totalLines}.xlsx`
+      );
+    }
 
-    //     if (data.errorInPath) {
-    //       writeParts(worksheet);
-    //       var options = {
-    //         title: "Save file",
-    //         defaultPath: "quote_filename",
-    //         buttonLabel: "Save",
-    //         filters: [{ name: "*.xlsx", extensions: ["xlsx"] }]
-    //       };
+    workbook.xlsx
+      .readFile(templatePath)
+      .then(() => {
+        let worksheet = workbook.getWorksheet(1);
 
-    //       dialog
-    //         .showSaveDialog(null, options)
-    //         .then(result => {
-    //           let filename = result.filePath;
-    //           workbook.xlsx
-    //             .writeBuffer()
-    //             .then(buffer => {
-    //               fs.writeFileSync(filename, buffer);
-    //               res.send({
-    //                 exit_code: 0,
-    //                 status: "Quote successfully created!",
-    //                 quote_path: filename,
-    //                 parts: req.headers.parts,
-    //               });
-    //             })
-    //             .catch(reason => {
-    //               res.send({
-    //                 exit_code: -2,
-    //                 status: "Error writting buffer to file for error in path",
-    //                 message: reason
-    //               });
-    //               console.log(reason);
-    //             });
-    //         })
-    //         .catch(reason => {
-    //           res.send({
-    //             exit_code: -2,
-    //             status: reason,
-    //             message: "Error showing save dialog for error in path"
-    //           });
-    //           console.log(reason);
-    //         });
-    //     } else {
-    //       let workingDirctory = data.filePath.replace(/\/(?:.(?!\/))+$/g, "");
-    //       let outputFileName =
-    //         data.company +
-    //         "-" +
-    //         data.quoteNumFromUser +
-    //         "-" +
-    //         data.quoteDescFromPath +
-    //         ".xlsx";
+        if (data.errorInPath) {
+          writeParts(worksheet);
+          var options = {
+            title: "Save file",
+            defaultPath: "quote_filename",
+            buttonLabel: "Save",
+            filters: [{ name: "*.xlsx", extensions: ["xlsx"] }]
+          };
 
-    //       let outputFilePath = workingDirctory + "/" + outputFileName;
+          dialog
+            .showSaveDialog(null, options)
+            .then(result => {
+              let filename = result.filePath;
+              workbook.xlsx
+                .writeBuffer()
+                .then(buffer => {
+                  fs.writeFileSync(filename, buffer);
+                  res.send({
+                    exit_code: 0,
+                    message: `Quote successfully saved to ${filename}`,
+                    quote_path: filename
+                  });
+                })
+                .catch(reason => {
+                  res.send({
+                    exit_code: -2,
+                    message: "Error writting buffer to file for error in path",
+                    error: reason
+                  });
+                  console.log(reason);
+                });
+            })
+            .catch(reason => {
+              res.send({
+                exit_code: -2,
+                error: reason,
+                message: "Error showing save dialog for error in path"
+              });
+              console.log(reason);
+            });
+        } else {
+          let workingDirctory = data.filePath.replace(/\/(?:.(?!\/))+$/g, "");
+          let outputFileName =
+            data.company +
+            "-" +
+            data.quoteNumFromUser +
+            "-" +
+            data.quoteDescFromPath +
+            ".xlsx";
 
-    //       writeParts(worksheet);
+          let outputFilePath = workingDirctory + "/" + outputFileName;
 
-    //       let dateCell = worksheet.getCell("B7");
-    //       dateCell.value = new Date();
+          writeParts(worksheet);
 
-    //       let toCell = worksheet.getCell("B8");
-    //       toCell.value = data.company;
+          let dateCell = worksheet.getCell("B7");
+          dateCell.value = new Date();
 
-    //       let attCell = worksheet.getCell("B9");
-    //       attCell.value = data.attention;
+          let toCell = worksheet.getCell("B8");
+          toCell.value = data.company;
 
-    //       let reCell = worksheet.getCell("B10");
-    //       reCell.value = data.regarding;
+          let attCell = worksheet.getCell("B9");
+          attCell.value = data.attention;
 
-    //       let descCell = worksheet.getCell("B13");
-    //       descCell.value = data.quoteDescForQuote;
+          let reCell = worksheet.getCell("B10");
+          reCell.value = data.regarding;
 
-    //       workbook.xlsx
-    //         .writeFile(outputFilePath)
-    //         .then(() => {
-    //           res.send({
-    //             exit_code: 0,
-    //             status: "Quote successfully created!",
-    //             quote_path: outputFilePath
-    //           });
-    //         })
-    //         .catch(reason => {
-    //           res.send({
-    //             exit_code: -1,
-    //             status: reason,
-    //             message: "Error writting file when no error in path"
-    //           });
-    //           console.log(reason);
-    //         });
-    //     }
-    //   })
-    //   .catch(reason => {
-    //     res.send({
-    //       exit_code: -1,
-    //       status: reason,
-    //       message: "Error reading template file",
-    //     });
-    //     console.log(reason);
-    //   });
+          let descCell = worksheet.getCell("B13");
+          descCell.value = data.quoteDescForQuote;
+
+          workbook.xlsx
+            .writeFile(outputFilePath)
+            .then(() => {
+              res.send({
+                exit_code: 0,
+                message: `Quote successfully saved to ${data.quoteNumFromPath}-${data.quoteDescFromPath}/${outputFileName}`,
+                quote_path: outputFilePath
+              });
+            })
+            .catch(reason => {
+              res.send({
+                exit_code: -1,
+                error: reason,
+                message: "Error writting file when no error in path"
+              });
+              console.log(reason);
+            });
+        }
+      })
+      .catch(reason => {
+        res.send({
+          exit_code: -1,
+          error: reason,
+          message: "Error reading template file"
+        });
+        console.log(reason);
+      });
   });
 
   expressApp.listen(5000, function() {
