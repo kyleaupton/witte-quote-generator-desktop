@@ -2,6 +2,7 @@ module.exports = {
   pluginOptions: {
     electronBuilder: {
       builderOptions: {
+        publish: ["github"],
         productName: "Witte Quote Generator",
         appId: "com.electron.witte-quote-generator",
         mac: {
