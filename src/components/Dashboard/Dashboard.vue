@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard-main">
-    <div>Updater Test</div>
+    <div>Updater Test 2</div>
     <b-card class="dashboard-recents-card" header="Recents">
       <div class="dashboard-recents-container">
         <RecentQuote
