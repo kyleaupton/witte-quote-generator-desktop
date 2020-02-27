@@ -10,7 +10,6 @@
         />
       </div>
     </b-card>
-    <!-- <hr class="my-4 dashboard-divider" /> -->
     <b-button
       class="dashboard-button"
       variant="outline-success"
@@ -18,13 +17,15 @@
     >
       New Quote
     </b-button>
+    <b-button class="dashboard-button" variant="outline-success" @click="test">
+      test
+    </b-button>
   </div>
 </template>
 
 <script>
 import Header from "./Header";
 import RecentQuote from "./RecentQuote";
-// const dbrecents = require("../../../db/dbrecents");
 
 export default {
   name: "Dashboard",
@@ -36,23 +37,26 @@ export default {
 
   data() {
     return {
-      recents: []
+      recents: null
     };
   },
 
   created() {
-    // this.getRecents();
+    this.getRecents();
   },
 
   methods: {
     getRecents() {
-      dbrecents.getAll(callback => {
-        this.recents = callback;
-      });
+      this.recents = JSON.parse(this.$store.getters.recentQuotes);
+      console.log(this.recents);
     },
 
     handleNewQuote() {
       this.$router.push("/newquote");
+    },
+
+    test() {
+      this.$store.commit("clearRecentQuotes");
     }
   }
 };

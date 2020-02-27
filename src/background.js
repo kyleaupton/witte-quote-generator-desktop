@@ -163,6 +163,7 @@ app.on("ready", async () => {
                 .writeBuffer()
                 .then(buffer => {
                   fs.writeFileSync(filename, buffer);
+
                   res.send({
                     exit_code: 0,
                     message: `Quote successfully saved to ${filename}`,
@@ -218,10 +219,19 @@ app.on("ready", async () => {
           workbook.xlsx
             .writeFile(outputFilePath)
             .then(() => {
+              const now = new Date();
+              let recentQuote = {
+                quoteNumber: data.quoteNumFromUser,
+                company: data.company,
+                pathToQuote: outputFilePath,
+                pathToWorkingDirectory: workingDirctory,
+                timeCreated: Math.round(now.getTime() / 1000)
+              };
               res.send({
                 exit_code: 0,
                 message: `Quote successfully saved to ${data.quoteNumFromPath}-${data.quoteDescFromPath}/${outputFileName}`,
-                quote_path: outputFilePath
+                quote_path: outputFilePath,
+                recentQuote: JSON.stringify(recentQuote)
               });
             })
             .catch(reason => {

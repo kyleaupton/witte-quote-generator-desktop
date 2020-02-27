@@ -260,15 +260,16 @@ export default {
         headers: {
           data: JSON.stringify(this.masterData)
         }
-      })
-        .then(data => {
-          console.log(data.data);
-          this.makeToast(data.data);
-        })
-        .catch(reason => {
-          console.log(reason.data);
-          this.makeToast(data.data);
-        });
+      }).then(data => {
+        console.log(data.data);
+        this.$store.commit("addRecentQuote", JSON.parse(data.data.recentQuote));
+        this.makeToast(data.data);
+      });
+
+      // .catch(reason => {
+      //   console.log(reason.data);
+      //   this.makeToast(reason.data);
+      // });
     },
 
     handleCancel() {
