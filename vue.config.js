@@ -8,7 +8,8 @@ module.exports = {
           target: "dmg",
           darkModeSupport: false,
           icon: "build/icons/icon.icns"
-        }
+        },
+        files: ["**/*", "src/utils/databases", "src/utils/spreadsheets"]
       }
     }
   }

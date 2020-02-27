@@ -239,7 +239,9 @@ export default {
         this.masterData.company = data.company;
 
         this.masterData.quoteNumFromPath = data.quoteNumFromPath;
-        this.masterData.quoteNumFromUser = data.quoteNumFromPath + "R";
+        if (!data.errorInPath) {
+          this.masterData.quoteNumFromUser = data.quoteNumFromPath + "R";
+        }
 
         this.masterData.quoteDescFromPath = data.quoteDescFromPath;
         this.masterData.quoteDescForQuote = data.quoteDescFromPath;
@@ -255,10 +257,10 @@ export default {
         }
       })
         .then(data => {
-          console.log(data);
+          console.log(data.data);
         })
         .catch(reason => {
-          console.log(reason);
+          console.log(reason.data);
         });
     },
 

@@ -1,6 +1,9 @@
-const PDFJS = require("pdfjs-dist");
+const PDFJS = require("pdfjs-dist/build/pdf");
+const pdfjsWorker = import("pdfjs-dist/build/pdf.worker.entry");
 const db = require("./db");
 const { getMetaData } = require("./quote");
+
+PDFJS.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
 function getPdfText(path) {
   return new Promise((resolve, reject) => {
