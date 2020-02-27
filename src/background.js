@@ -13,8 +13,7 @@ const fs = require("fs");
 const path = require("path");
 const isDevelopment = process.env.NODE_ENV !== "production";
 const { dialog } = require("electron");
-
-require("update-electron-app")();
+import { autoUpdater } from "electron-updater";
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -43,6 +42,7 @@ function createWindow() {
     createProtocol("app");
     // Load the index.html when not in development
     win.loadURL("app://./index.html");
+    autoUpdater.checkForUpdatesAndNotify();
   }
 
   win.on("closed", () => {
