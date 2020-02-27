@@ -7,7 +7,6 @@ module.exports = {
         appId: "com.electron.witte-quote-generator",
         mac: {
           category: "public.app-category.utilities",
-          target: "dmg",
           darkModeSupport: false,
           icon: "build/icon.icns"
         },
