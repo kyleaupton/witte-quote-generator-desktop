@@ -262,7 +262,7 @@ export default {
         }
       }).then(data => {
         console.log(data.data);
-        this.$store.commit("addRecentQuote", JSON.parse(data.data.recentQuote));
+        this.$store.commit("addRecentQuote", data.data.recent_quote);
         this.makeToast(data.data);
       });
 

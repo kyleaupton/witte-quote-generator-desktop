@@ -19,7 +19,7 @@ const getDefaultState = () => {
 
   if (!localStorage.getItem("recentQuotes")) {
     localStorage.setItem("recentQuotes", JSON.stringify([]));
-    recentQuotes = localStorage.getItem("recentQuotes");
+    recentQuotes = JSON.stringify([]);
     console.log("Made new recent quotes array in local storage");
   } else {
     recentQuotes = localStorage.getItem("recentQuotes");
@@ -35,27 +35,28 @@ export default new Vuex.Store({
   mutations: {
     clearRecentQuotes(state) {
       localStorage.setItem("recentQuotes", JSON.stringify([]));
-      state.recentQuotes = localStorage.getItem("recentQuotes");
+      state.recentQuotes = JSON.stringify([]);
     },
 
     addRecentQuote(state, quote) {
       let recentQuotes = JSON.parse(localStorage.getItem("recentQuotes"));
+      let newRecentQuote = JSON.parse(quote);
 
       // Check to make sure we're not adding the same quote twice. Unique key is quote num with revision.
       for (let i = 0; i < recentQuotes.length; i++) {
-        if (recentQuotes[i].quoteNumber === quote.quoteNumber) {
+        if (recentQuotes[i].quoteNumber === newRecentQuote.quoteNumber) {
           console.log("Quote already in recents, omitting.");
           return;
         }
       }
 
       if (recentQuotes.length === 20) {
-        recentQuotes.unshift(quote);
+        recentQuotes.unshift(newRecentQuote);
         recentQuotes.pop();
       } else {
-        recentQuotes.unshift(quote);
+        recentQuotes.unshift(newRecentQuote);
       }
-      state.recentQuotes = recentQuotes;
+      state.recentQuotes = JSON.stringify(recentQuotes);
       localStorage.setItem("recentQuotes", JSON.stringify(recentQuotes));
     }
   },

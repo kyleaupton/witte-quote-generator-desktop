@@ -227,11 +227,13 @@ app.on("ready", async () => {
                 pathToWorkingDirectory: workingDirctory,
                 timeCreated: Math.round(now.getTime() / 1000)
               };
+              console.log("Raw quote to add: \n" + recentQuote);
+              console.log("Stringified: \n" + JSON.stringify(recentQuote));
               res.send({
                 exit_code: 0,
                 message: `Quote successfully saved to ${data.quoteNumFromPath}-${data.quoteDescFromPath}/${outputFileName}`,
                 quote_path: outputFilePath,
-                recentQuote: JSON.stringify(recentQuote)
+                recent_quote: JSON.stringify(recentQuote)
               });
             })
             .catch(reason => {

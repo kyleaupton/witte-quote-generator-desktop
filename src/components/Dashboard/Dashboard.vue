@@ -2,12 +2,23 @@
   <div class="dashboard-main">
     <b-card class="dashboard-recents-card" header="Recents">
       <div class="dashboard-recents-container">
-        <RecentQuote
-          class="dashboard-recent-element"
-          v-for="item in recents"
-          v-bind:key="item.quoteNumber"
-          :data="item"
-        />
+        <div v-if="recents.length > 0">
+          <RecentQuote
+            class="dashboard-recent-element"
+            v-for="item in recents"
+            v-bind:key="item.quoteNumber"
+            :data="item"
+          />
+          <p @click="clearRecents" class="dashboard-recent-clear">
+            Clear recents
+          </p>
+        </div>
+        <div
+          class="dashboard-recents-text-container"
+          v-if="recents.length === 0"
+        >
+          <p>No recents</p>
+        </div>
       </div>
     </b-card>
     <b-button
@@ -16,9 +27,6 @@
       @click="handleNewQuote"
     >
       New Quote
-    </b-button>
-    <b-button class="dashboard-button" variant="outline-success" @click="test">
-      test
     </b-button>
   </div>
 </template>
@@ -35,27 +43,18 @@ export default {
     RecentQuote
   },
 
-  data() {
-    return {
-      recents: null
-    };
-  },
-
-  created() {
-    this.getRecents();
+  computed: {
+    recents() {
+      return JSON.parse(this.$store.getters.recentQuotes);
+    }
   },
 
   methods: {
-    getRecents() {
-      this.recents = JSON.parse(this.$store.getters.recentQuotes);
-      console.log(this.recents);
-    },
-
     handleNewQuote() {
       this.$router.push("/newquote");
     },
 
-    test() {
+    clearRecents() {
       this.$store.commit("clearRecentQuotes");
     }
   }
@@ -76,6 +75,8 @@ export default {
   overflow-x: scroll;
   overflow-y: hidden;
   white-space: nowrap;
+  width: 810px;
+  height: 153px;
 }
 
 .dashboard-recent-element {
@@ -90,5 +91,22 @@ export default {
 
 .dashboard-button {
   margin-top: 24px;
+}
+
+.dashboard-recents-text-container {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  text-align: center;
+  color: #6c757d;
+}
+
+.dashboard-recent-clear {
+  position: absolute;
+  top: 52px;
+  right: 4px;
+  font-size: 10px;
+  text-decoration: underline;
+  cursor: pointer;
 }
 </style>
