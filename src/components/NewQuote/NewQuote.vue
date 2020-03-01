@@ -83,19 +83,52 @@
         variant="outline-secondary"
         >Cancel</b-button
       >
+
+      <b-button
+        class="new-quote-button"
+        @click="$bvModal.show('bv-modal-error')"
+        variant="outline-secondary"
+        >Test</b-button
+      >
     </b-form-group>
 
-    <b-modal id="bv-modal-example" hide-footer>
+    <b-modal id="bv-modal-dropbox" hide-footer>
       <template v-slot:modal-title>
         Uh oh!
       </template>
       <div class="d-block text-center">
         <p>
-          Looks like there's an error in pdf file's path. Please check the path
-          and try again.
+          Looks like this quote doesn't have a folder structure, would you like
+          to make one?
         </p>
       </div>
-      <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-example')"
+      <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-dropbox')"
+        >Close</b-button
+      >
+    </b-modal>
+    <b-modal id="bv-modal-error" hide-footer>
+      <template v-slot:modal-title>
+        Uh oh!
+      </template>
+      <div class="d-block text-left">
+        <p>
+          You have the following errors in your folder structure:
+        </p>
+        <div
+          class="new-quote-modal-error-container"
+          v-for="item in errors"
+          v-bind:key="item.error"
+        >
+          <p class="new-quote-modal-error-item" style="color: red">
+            Error
+          </p>
+          <p class="new-quote-modal-error-item" style="white-space: pre-line">
+            {{ item.error }}
+          </p>
+          <br />
+        </div>
+      </div>
+      <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-error')"
         >Close</b-button
       >
     </b-modal>
@@ -104,6 +137,7 @@
 
 <script>
 import NewQuotePreview from "./NewQuotePreview";
+import Error from "./Error";
 import { getParts } from "@/utils/pdf";
 import { getMetaData } from "@/utils/quote";
 import { writeXlsxFile } from "@/utils/xlsx";
@@ -114,7 +148,8 @@ export default {
   name: "NewQuote",
 
   components: {
-    NewQuotePreview
+    NewQuotePreview,
+    Error
   },
 
   data() {
@@ -122,6 +157,11 @@ export default {
       initLoaded: false,
       file: null,
       errorInTotalLines: false,
+
+      errors: null,
+
+      modalMessage:
+        "Too many hyphens. Only the following is allowed:\n\nCompany-State\nCompany-State-City\nCompany-Country\nCompany-Country-City",
 
       masterData: {
         attention: "",
@@ -231,10 +271,6 @@ export default {
       getParts(dataStream, this.file.path).then(data => {
         this.initLoaded = true;
 
-        if (data.errorInPath) {
-          this.$bvModal.show("bv-modal-example");
-        }
-
         this.masterData.errorInPath = data.errorInPath;
         this.masterData.errorInParts = data.errorInParts;
 
@@ -250,6 +286,13 @@ export default {
 
         this.masterData.quoteDescFromPath = data.quoteDescFromPath;
         this.masterData.quoteDescForQuote = data.quoteDescFromPath;
+
+        if (data.errorInPath) {
+          this.errors = data.errors;
+          this.$bvModal.show("bv-modal-error");
+        } else if (!data.isInDropbox) {
+          this.$bvModal.show("bv-modal-dropbox");
+        }
       });
     },
 
@@ -357,5 +400,19 @@ export default {
 
 .new-quote-button {
   margin-right: 6px;
+}
+
+.bv-modal-error {
+  text-align: right;
+}
+
+.new-quote-modal-error-item {
+  margin-bottom: 0;
+}
+
+.new-quote-modal-error-container {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  white-space: nowrap;
 }
 </style>

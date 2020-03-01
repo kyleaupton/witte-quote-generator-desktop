@@ -99,6 +99,8 @@ function getParts(pdfFile, filePath) {
     let payload = {
       errorInPath: false,
       errorInParts: false,
+      isInDropbox: true,
+      errors: null,
       parts: null,
       company: "",
       quoteNumFromPath: "",
@@ -113,6 +115,8 @@ function getParts(pdfFile, filePath) {
 
     await getPdfMetaData.then(data => {
       payload.errorInPath = data.errorInPath;
+      payload.errors = data.errors;
+      payload.isInDropbox = data.isInDropbox;
       payload.company = data.company;
       payload.quoteNumFromPath = data.quoteNumFromPath;
       payload.quoteDescFromPath = data.quoteDescFromPath;

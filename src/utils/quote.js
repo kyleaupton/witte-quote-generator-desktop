@@ -1,20 +1,32 @@
+const { checkPath } = require("./pathValidator");
+
 module.exports = {
   getMetaData: filePath => {
     return new Promise((resolve, reject) => {
       let payload = {
         errorInPath: false,
+        errors: [],
+        isInDropbox: true,
         company: "",
         quoteNumFromPath: "",
         quoteDescFromPath: ""
       };
 
-      // Company
-      let company = filePath.match(/(2 - Quotes).+?\//g);
-      if (!company) {
+      let validation = checkPath(filePath);
+
+      if (!validation.isInDropbox) {
+        payload.isInDropbox = false;
+        resolve(payload);
+        return;
+      } else if (validation.errorInPath) {
         payload.errorInPath = true;
+        payload.errors = validation.errors;
         resolve(payload);
         return;
       }
+
+      // Company
+      let company = filePath.match(/(2 - Quotes).+?\//g);
       company[0] = company[0].replace("2 - Quotes/", "");
       company[0] = company[0].replace("/", "");
       payload.company = company[0];
