@@ -98,12 +98,24 @@
       </template>
       <div class="d-block text-center">
         <p>
-          Looks like this quote doesn't have a folder structure, would you like
-          to make one?
+          Looks like this quote doesn't have a folder structure in dropbox,
+          would you like to make one?
         </p>
       </div>
-      <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-dropbox')"
-        >Close</b-button
+      <b-button
+        class="new-quote-modal-button"
+        variant="outline-secondary"
+        @click="
+          $bvModal.hide('bv-modal-dropbox');
+          masterData.errorInPath = true;
+        "
+        >No, thanks.</b-button
+      >
+      <b-button
+        class="new-quote-modal-button"
+        @click="handleMakeFileStructure"
+        variant="outline-primary"
+        >Yes</b-button
       >
     </b-modal>
     <b-modal id="bv-modal-error" hide-footer>
@@ -123,21 +135,39 @@
             Error
           </p>
           <p class="new-quote-modal-error-item" style="white-space: pre-line">
-            {{ item.error }}
+            - {{ item.error }}
           </p>
           <br />
         </div>
+        <p>
+          You can still create a quote, however you will be unable to save it to
+          the improper directory. It is very important to either fix the errors,
+          or create the file sturcture with the automated tool.
+        </p>
       </div>
-      <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-error')"
+      <b-button
+        class="mt-3"
+        block
+        @click="$bvModal.hide('bv-modal-error')"
+        variant="outline-secondary"
         >Close</b-button
       >
+    </b-modal>
+    <b-modal id="bv-modal-make-folder-structure" hide-footer>
+      <template v-slot:modal-title>
+        Folder Structure:
+      </template>
+      <!-- <div class="d-block text-left">
+        <p>Test</p>
+      </div> -->
+      <MakeFolderStructure :file="file" />
     </b-modal>
   </div>
 </template>
 
 <script>
 import NewQuotePreview from "./NewQuotePreview";
-import Error from "./Error";
+import MakeFolderStructure from "./MakeFolderStructure";
 import { getParts } from "@/utils/pdf";
 import { getMetaData } from "@/utils/quote";
 import { writeXlsxFile } from "@/utils/xlsx";
@@ -149,7 +179,7 @@ export default {
 
   components: {
     NewQuotePreview,
-    Error
+    MakeFolderStructure
   },
 
   data() {
@@ -280,7 +310,7 @@ export default {
         this.masterData.company = data.company;
 
         this.masterData.quoteNumFromPath = data.quoteNumFromPath;
-        if (!data.errorInPath) {
+        if (!data.errorInPath && data.isInDropbox) {
           this.masterData.quoteNumFromUser = data.quoteNumFromPath + "R";
         }
 
@@ -308,11 +338,6 @@ export default {
         this.$store.commit("addRecentQuote", data.data.recent_quote);
         this.makeToast(data.data);
       });
-
-      // .catch(reason => {
-      //   console.log(reason.data);
-      //   this.makeToast(reason.data);
-      // });
     },
 
     handleCancel() {
@@ -376,6 +401,18 @@ export default {
         solid: true,
         toaster: "b-toaster-bottom-full"
       });
+    },
+
+    handleMakeFileStructure() {
+      this.$bvModal.hide("bv-modal-dropbox");
+      this.$bvModal.show("bv-modal-make-folder-structure");
+    },
+
+    handleResponseFromMakeFileStructure(payload) {
+      if (payload.error) {
+      } else {
+        console.log(payload.file);
+      }
     }
   }
 };
@@ -414,5 +451,9 @@ export default {
   overflow-x: hidden;
   overflow-y: scroll;
   white-space: nowrap;
+}
+
+.new-quote-modal-button {
+  margin-right: 4px;
 }
 </style>

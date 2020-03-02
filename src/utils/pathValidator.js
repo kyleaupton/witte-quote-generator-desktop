@@ -51,6 +51,23 @@ module.exports = {
       errorInCompany: false,
       errors: []
     };
+
+    if (company === "") {
+      payload.errorInCompany = true;
+      return payload;
+    }
+
+    // Comany must match to the correct structure before it checks anything else
+    if (
+      !company.match(/^[^-]+-[A-Z]{2}$/g) &&
+      !company.match(/^[^-]+-[A-Z]{2}-[^-]+$/g) &&
+      !company.match(/^[^-]+-[^-]{3,}$/g) &&
+      !company.match(/^[^-]+-[^-]{3,}-[^-]+$/g)
+    ) {
+      payload.errorInCompany = true;
+      return payload;
+    }
+
     /*
      *  Checks for extranious hyphens. Will match to the following.
      *  BASF-MI-City-Extra
@@ -74,9 +91,11 @@ module.exports = {
      */
 
     function validCountry(country) {
-      let countriesAsString = JSON.stringify(countries);
-      if (countriesAsString.includes(country)) {
-        return true;
+      const entries = Object.entries(countries);
+      for (let i = 0; i < entries.length; i++) {
+        if (entries[i][1].name === country) {
+          return true;
+        }
       }
       return false;
     }
@@ -122,6 +141,17 @@ module.exports = {
       errorInMeta: false,
       errors: []
     };
+
+    if (meta === "") {
+      payload.errorInMeta = true;
+      return payload;
+    }
+
+    // Must check for correct meta structure before anything else.
+    if (!meta.match(/^\d{2}Q\d{3}-[^-]+$/g)) {
+      payload.errorInMeta = true;
+      return payload;
+    }
 
     if (meta.match(/(\s-|-\s)/g)) {
       payload.errorInMeta = true;
