@@ -29,9 +29,14 @@ function createWindow() {
   win = new BrowserWindow({
     width: 900,
     height: 550,
+    title: "Witte Quote Generator",
     webPreferences: {
       nodeIntegration: true
     }
+  });
+
+  win.on("page-title-updated", function(e) {
+    e.preventDefault();
   });
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
@@ -64,6 +69,7 @@ app.on("activate", () => {
   // dock icon is clicked and there are no other windows open.
   if (win === null) {
     createWindow();
+    win.setTitle;
   }
 });
 

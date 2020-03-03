@@ -43,6 +43,8 @@ export default {
     RecentQuote
   },
 
+  created() {},
+
   computed: {
     recents() {
       return JSON.parse(this.$store.getters.recentQuotes);

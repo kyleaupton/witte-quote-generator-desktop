@@ -20,13 +20,13 @@
     </div>
     <b-button
       class="make-folder-struc-button"
-      @click="$bvModal.hide('bv-modal-make-folder-structure')"
+      @click="handleCancel"
       variant="outline-secondary"
-      >Cancel</b-button
+      >No, thanks.</b-button
     >
     <b-button
       class="make-folder-struc-button"
-      @click="makeStructure"
+      @click="handleMakeStructure"
       variant="outline-primary"
       >Make Structure</b-button
     >
@@ -67,7 +67,7 @@ export default {
   },
 
   methods: {
-    makeStructure() {
+    handleMakeStructure() {
       let workindDir = path.join(
         os.homedir(),
         "Dropbox",
@@ -77,6 +77,7 @@ export default {
       );
       let payload = {
         error: false,
+        errorInPath: false,
         message: "",
         newFilePath: ""
       };
@@ -94,6 +95,17 @@ export default {
         this.$emit("response", payload);
         this.$bvModal.hide("bv-modal-make-folder-structure");
       }
+    },
+
+    handleCancel() {
+      let payload = {
+        error: false,
+        errorInPath: true,
+        message: "",
+        newFilePath: ""
+      };
+      this.$emit("response", payload);
+      this.$bvModal.hide("bv-modal-make-folder-structure");
     }
   },
 

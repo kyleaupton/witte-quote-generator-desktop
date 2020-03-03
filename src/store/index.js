@@ -39,14 +39,15 @@ export default new Vuex.Store({
     },
 
     addRecentQuote(state, quote) {
+      console.log("got here");
       let recentQuotes = JSON.parse(localStorage.getItem("recentQuotes"));
       let newRecentQuote = JSON.parse(quote);
 
       // Check to make sure we're not adding the same quote twice. Unique key is quote num with revision.
       for (let i = 0; i < recentQuotes.length; i++) {
         if (recentQuotes[i].quoteNumber === newRecentQuote.quoteNumber) {
-          console.log("Quote already in recents, omitting.");
-          return;
+          recentQuotes.splice(i, 1);
+          console.log("got here");
         }
       }
 

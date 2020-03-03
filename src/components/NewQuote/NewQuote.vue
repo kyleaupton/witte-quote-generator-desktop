@@ -52,7 +52,7 @@
         >
           <template v-slot:title>Uh oh!</template>
           The maximum number of total lines supported is 25, please choose
-          {{ 25 - masterData.parts.length }} lines or less.
+          {{ 25 - masterData.parts.length }} line(s) or less.
         </b-popover>
       </b-form>
     </b-form-group>
@@ -83,41 +83,7 @@
         variant="outline-secondary"
         >Cancel</b-button
       >
-
-      <b-button
-        class="new-quote-button"
-        @click="$bvModal.show('bv-modal-error')"
-        variant="outline-secondary"
-        >Test</b-button
-      >
     </b-form-group>
-
-    <!-- <b-modal id="bv-modal-dropbox" hide-footer>
-      <template v-slot:modal-title>
-        Uh oh!
-      </template>
-      <div class="d-block text-center">
-        <p>
-          Looks like this quote doesn't have a folder structure in dropbox,
-          would you like to make one?
-        </p>
-      </div>
-      <b-button
-        class="new-quote-modal-button"
-        variant="outline-secondary"
-        @click="
-          $bvModal.hide('bv-modal-dropbox');
-          masterData.errorInPath = true;
-        "
-        >No, thanks.</b-button
-      >
-      <b-button
-        class="new-quote-modal-button"
-        @click="handleMakeFileStructure"
-        variant="outline-primary"
-        >Yes</b-button
-      >
-    </b-modal> -->
 
     <!-- Modal to display errors in file path. Only displayed with file from dropbox. -->
     <b-modal id="bv-modal-error" hide-footer>
@@ -126,7 +92,7 @@
       </template>
       <div class="d-block text-left">
         <p>
-          You have the following errors in your folder structure:
+          You have the following error(s) in your folder structure:
         </p>
         <div
           class="new-quote-modal-error-container"
@@ -261,11 +227,12 @@ export default {
     },
 
     serialNumValidation() {
-      return (
-        (this.masterData.serialNum.length === 5 &&
-          !isNaN(this.masterData.serialNum)) ||
-        this.masterData.serialNum.length === 0
-      );
+      if (this.masterData.serialNum.match(/^\d{5}-\d{2,3}$/g)) {
+        return true;
+      } else if (this.masterData.serialNum.length === 0) {
+        return true;
+      }
+      return false;
     },
 
     generateButtonValidation() {
@@ -319,30 +286,39 @@ export default {
       this.resetData();
       const dataStream = fs.readFileSync(filePath);
       this.masterData.filePath = filePath;
-      getParts(dataStream, filePath).then(data => {
-        this.initLoaded = true;
+      getParts(dataStream, filePath)
+        .then(data => {
+          this.initLoaded = true;
 
-        this.masterData.errorInPath = data.errorInPath;
-        this.masterData.errorInParts = data.errorInParts;
+          this.masterData.errorInPath = data.errorInPath;
+          this.masterData.errorInParts = data.errorInParts;
 
-        this.masterData.parts = data.parts;
-        this.masterData.totalLines = data.parts.length;
+          this.masterData.parts = data.parts;
+          this.masterData.totalLines = data.parts.length;
 
-        this.masterData.company = data.company;
+          this.masterData.company = data.company;
 
-        this.masterData.quoteNumFromPath = data.quoteNumFromPath;
-        if (!data.errorInPath && data.isInDropbox) {
-          this.masterData.quoteNumFromUser = data.quoteNumFromPath + "R";
-        }
+          this.masterData.quoteNumFromPath = data.quoteNumFromPath;
+          if (!data.errorInPath && data.isInDropbox) {
+            this.masterData.quoteNumFromUser = data.quoteNumFromPath + "R";
+          }
 
-        this.masterData.quoteDescFromPath = data.quoteDescFromPath;
-        this.masterData.quoteDescForQuote = data.quoteDescFromPath;
+          this.masterData.quoteDescFromPath = data.quoteDescFromPath;
+          this.masterData.quoteDescForQuote = data.quoteDescFromPath;
 
-        if (data.errorInPath) {
-          this.errors = data.errors;
-          this.$bvModal.show("bv-modal-error");
-        }
-      });
+          if (data.errorInPath) {
+            console.log(data);
+            this.errors = data.errors;
+            this.$bvModal.show("bv-modal-error");
+          }
+        })
+        .catch(error => {
+          this.makeToast(
+            "Uh oh",
+            "It's possible that this quote is incompatible with this program. Please contact the developer if you have any questions.",
+            "danger"
+          );
+        });
     },
 
     handelGenerate() {
@@ -353,7 +329,7 @@ export default {
           data: JSON.stringify(this.masterData)
         }
       }).then(data => {
-        if (data.exit_code === "0") {
+        if (data.data.exit_code === 0) {
           this.$store.commit("addRecentQuote", data.data.recent_quote);
         }
         this.makeToastFromHTTPResponse(data.data);
@@ -438,6 +414,8 @@ export default {
     handleResponseFromMakeFileStructure(payload) {
       if (payload.error) {
         this.makeToast("Uh oh!", payload.message, "danger");
+      } else if (payload.errorInPath) {
+        this.masterData.errorInPath = true;
       } else {
         this.makeToast("Success", payload.message, "success");
         this.fileFromChild = true;
