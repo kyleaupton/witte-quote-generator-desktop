@@ -65,6 +65,7 @@ module.exports = {
       !company.match(/^[^-]+-[^-]{3,}-[^-]+$/g)
     ) {
       payload.errorInCompany = true;
+      payload.errors.push("Invalid company structure.");
       return payload;
     }
 
@@ -148,7 +149,8 @@ module.exports = {
     }
 
     // Must check for correct meta structure before anything else.
-    if (!meta.match(/^\d{2}Q\d{3}-[^-]+$/g)) {
+    if (!meta.match(/^\d{2}Q\d{3}-.+$/g)) {
+      payload.errors.push("Invalid meta structure.");
       payload.errorInMeta = true;
       return payload;
     }

@@ -78,20 +78,21 @@ export default {
       let payload = {
         error: false,
         message: "",
-        newFile: null
+        newFilePath: ""
       };
       if (!fs.existsSync(workindDir)) {
         let newFilePath = path.join(workindDir, this.file.name);
         fs.mkdirSync(workindDir, { recursive: true });
         fs.copyFileSync(this.file.path, newFilePath);
-        this.file.path = newFilePath;
-        payload.newFile = this.file;
+        payload.newFilePath = newFilePath;
         payload.message = "Successfully created file structure.";
         this.$emit("response", payload);
+        this.$bvModal.hide("bv-modal-make-folder-structure");
       } else {
         payload.error = true;
         payload.message = "File structure already exists!";
         this.$emit("response", payload);
+        this.$bvModal.hide("bv-modal-make-folder-structure");
       }
     }
   },

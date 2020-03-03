@@ -92,7 +92,7 @@
       >
     </b-form-group>
 
-    <b-modal id="bv-modal-dropbox" hide-footer>
+    <!-- <b-modal id="bv-modal-dropbox" hide-footer>
       <template v-slot:modal-title>
         Uh oh!
       </template>
@@ -117,7 +117,9 @@
         variant="outline-primary"
         >Yes</b-button
       >
-    </b-modal>
+    </b-modal> -->
+
+    <!-- Modal to display errors in file path. Only displayed with file from dropbox. -->
     <b-modal id="bv-modal-error" hide-footer>
       <template v-slot:modal-title>
         Uh oh!
@@ -157,10 +159,10 @@
       <template v-slot:modal-title>
         Folder Structure:
       </template>
-      <!-- <div class="d-block text-left">
-        <p>Test</p>
-      </div> -->
-      <MakeFolderStructure :file="file" />
+      <MakeFolderStructure
+        @response="handleResponseFromMakeFileStructure"
+        :file="file"
+      />
     </b-modal>
   </div>
 </template>
@@ -185,13 +187,12 @@ export default {
   data() {
     return {
       initLoaded: false,
+
       file: null,
+
       errorInTotalLines: false,
 
       errors: null,
-
-      modalMessage:
-        "Too many hyphens. Only the following is allowed:\n\nCompany-State\nCompany-State-City\nCompany-Country\nCompany-Country-City",
 
       masterData: {
         attention: "",
@@ -290,15 +291,35 @@ export default {
 
     extraLinesComputed() {
       return this.selectOptions.selected;
+    },
+
+    filePath() {
+      if (this.fileFromChild) {
+        return this.filePathFromChild;
+      } else if (this.file) {
+        return this.file.path;
+      } else {
+        return null;
+      }
     }
   },
 
   methods: {
     handleInit() {
+      // First check if file came from dropbox or from elsewhere.
+      if (this.file.path.match(/Dropbox\/2 - Quotes/g)) {
+        this.handleGetParts(this.file.path);
+      } else {
+        // Show modal to generate file struc
+        this.$bvModal.show("bv-modal-make-folder-structure");
+      }
+    },
+
+    handleGetParts(filePath) {
       this.resetData();
-      const dataStream = fs.readFileSync(this.file.path);
-      this.masterData.filePath = this.file.path;
-      getParts(dataStream, this.file.path).then(data => {
+      const dataStream = fs.readFileSync(filePath);
+      this.masterData.filePath = filePath;
+      getParts(dataStream, filePath).then(data => {
         this.initLoaded = true;
 
         this.masterData.errorInPath = data.errorInPath;
@@ -320,8 +341,6 @@ export default {
         if (data.errorInPath) {
           this.errors = data.errors;
           this.$bvModal.show("bv-modal-error");
-        } else if (!data.isInDropbox) {
-          this.$bvModal.show("bv-modal-dropbox");
         }
       });
     },
@@ -329,14 +348,15 @@ export default {
     handelGenerate() {
       axios({
         method: "post",
-        url: "http://localhost:5000/writefile",
+        url: "http://localhost:1732/writefile",
         headers: {
           data: JSON.stringify(this.masterData)
         }
       }).then(data => {
-        console.log(data.data);
-        this.$store.commit("addRecentQuote", data.data.recent_quote);
-        this.makeToast(data.data);
+        if (data.exit_code === "0") {
+          this.$store.commit("addRecentQuote", data.data.recent_quote);
+        }
+        this.makeToastFromHTTPResponse(data.data);
       });
     },
 
@@ -370,6 +390,8 @@ export default {
       if (this.masterData.totalLines + this.selectOptions.selected > 25) {
         this.errorInTotalLines = true;
       } else {
+        this.masterData.totalLines =
+          this.masterData.parts.length + this.selectOptions.selected;
         this.errorInTotalLines = false;
       }
     },
@@ -394,7 +416,7 @@ export default {
       this.masterData = temp;
     },
 
-    makeToast(data) {
+    makeToastFromHTTPResponse(data) {
       this.$bvToast.toast(data.message, {
         title: !data.exit_code ? "Success!" : "Uh oh!",
         variant: !data.exit_code ? "success" : "danger",
@@ -403,15 +425,23 @@ export default {
       });
     },
 
-    handleMakeFileStructure() {
-      this.$bvModal.hide("bv-modal-dropbox");
-      this.$bvModal.show("bv-modal-make-folder-structure");
+    makeToast(title, message, variant) {
+      this.$bvToast.toast(message, {
+        title: title,
+        variant: variant,
+        solid: true,
+        toaster: "b-toaster-bottom-full",
+        autoHideDelay: 2000
+      });
     },
 
     handleResponseFromMakeFileStructure(payload) {
       if (payload.error) {
+        this.makeToast("Uh oh!", payload.message, "danger");
       } else {
-        console.log(payload.file);
+        this.makeToast("Success", payload.message, "success");
+        this.fileFromChild = true;
+        this.handleGetParts(payload.newFilePath);
       }
     }
   }

@@ -199,6 +199,16 @@ app.on("ready", async () => {
 
           let outputFilePath = workingDirctory + "/" + outputFileName;
 
+          // Make sure quote revison doesnt already exist
+          if (fs.existsSync(outputFilePath)) {
+            res.send({
+              exit_code: -1,
+              error: "",
+              message: "Quote revision already exists."
+            });
+            return;
+          }
+
           writeParts(worksheet);
 
           let dateCell = worksheet.getCell("B7");
@@ -227,8 +237,6 @@ app.on("ready", async () => {
                 pathToWorkingDirectory: workingDirctory,
                 timeCreated: Math.round(now.getTime() / 1000)
               };
-              console.log("Raw quote to add: \n" + recentQuote);
-              console.log("Stringified: \n" + JSON.stringify(recentQuote));
               res.send({
                 exit_code: 0,
                 message: `Quote successfully saved to ${data.quoteNumFromPath}-${data.quoteDescFromPath}/${outputFileName}`,
@@ -256,8 +264,8 @@ app.on("ready", async () => {
       });
   });
 
-  expressApp.listen(5000, function() {
-    console.log("Rest api listening on port 5000.");
+  expressApp.listen(1732, function() {
+    console.log("Rest api listening on port 1732.");
   });
 
   createWindow();
