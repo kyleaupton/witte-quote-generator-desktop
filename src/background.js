@@ -24,6 +24,8 @@ protocol.registerSchemesAsPrivileged([
   { scheme: "app", privileges: { secure: true, standard: true } }
 ]);
 
+app.setName("Witte Quote Generator");
+
 function createWindow() {
   // Create the browser window.
   win = new BrowserWindow({
