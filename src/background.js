@@ -13,7 +13,12 @@ const fs = require("fs");
 const path = require("path");
 const isDevelopment = process.env.NODE_ENV !== "production";
 const { dialog } = require("electron");
+const log = require("electron-log");
 import { autoUpdater } from "electron-updater";
+
+autoUpdater.logger = log;
+autoUpdater.logger.transports.file.level = "info";
+log.info("App starting...");
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.

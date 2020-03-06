@@ -1,6 +1,6 @@
 {
   "name": "witte-quote-generator-desktop",
-  "version": "0.20.0",
+  "version": "0.20.2",
   "private": true,
   "author": "Kyle Upton",
   "description": "Utility app for Witte Pumps and Technology LLC.",
@@ -22,6 +22,7 @@
     "bootstrap-vue": "^2.5.0",
     "cors": "^2.8.5",
     "countries-list": "^2.5.2",
+    "electron-log": "^4.0.7",
     "electron-updater": "^4.2.2",
     "exceljs": "^3.8.0",
     "express": "^4.17.1",
