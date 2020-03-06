@@ -263,7 +263,6 @@ export default {
     },
 
     handleGetParts(filePath) {
-      this.resetData();
       const dataStream = fs.readFileSync(filePath);
       this.masterData.filePath = filePath;
       getParts(dataStream, filePath)
@@ -353,8 +352,8 @@ export default {
     },
 
     resetData() {
-      this.initLoaded = false;
       this.file = null;
+      this.initLoaded = false;
       this.errorInTotalLines = false;
       this.errors = null;
       let temp = {
