@@ -1,9 +1,7 @@
 <template>
   <div class="new-quote-main">
     <b-form-group>
-      <b-form-text id="password-help-block">
-        Start by selecting the quote from Germany.
-      </b-form-text>
+      <b-form-text id="password-help-block">Start by selecting the quote from Germany.</b-form-text>
       <b-form-file
         v-model="file"
         :state="Boolean(file)"
@@ -75,36 +73,19 @@
         @click="handelGenerate"
         variant="outline-success"
         :disabled="generateButtonValidation"
-        >Generate</b-button
-      >
-      <b-button
-        class="new-quote-button"
-        @click="handleCancel"
-        variant="outline-secondary"
-        >Cancel</b-button
-      >
+      >Generate</b-button>
+      <b-button class="new-quote-button" @click="resetData" variant="outline-secondary">Reset</b-button>
+      <b-button class="new-quote-button" @click="handleCancel" variant="outline-secondary">Back</b-button>
     </b-form-group>
 
     <!-- Modal to display errors in file path. Only displayed with file from dropbox. -->
-    <b-modal id="bv-modal-error" hide-footer>
-      <template v-slot:modal-title>
-        Uh oh!
-      </template>
+    <b-modal id="bv-modal-error" hide-footer :hide-header-close="true" :no-close-on-backdrop="true">
+      <template v-slot:modal-title>Uh oh!</template>
       <div class="d-block text-left">
-        <p>
-          You have the following error(s) in your folder structure:
-        </p>
-        <div
-          class="new-quote-modal-error-container"
-          v-for="item in errors"
-          v-bind:key="item.error"
-        >
-          <p class="new-quote-modal-error-item" style="color: red">
-            Error
-          </p>
-          <p class="new-quote-modal-error-item" style="white-space: pre-line">
-            - {{ item.error }}
-          </p>
+        <p>You have the following error(s) in your folder structure:</p>
+        <div class="new-quote-modal-error-container" v-for="item in errors" v-bind:key="item.error">
+          <p class="new-quote-modal-error-item" style="color: red">Error</p>
+          <p class="new-quote-modal-error-item" style="white-space: pre-line">- {{ item.error }}</p>
           <br />
         </div>
         <p>
@@ -118,17 +99,16 @@
         block
         @click="$bvModal.hide('bv-modal-error')"
         variant="outline-secondary"
-        >Close</b-button
-      >
+      >Close</b-button>
     </b-modal>
-    <b-modal id="bv-modal-make-folder-structure" hide-footer>
-      <template v-slot:modal-title>
-        Folder Structure:
-      </template>
-      <MakeFolderStructure
-        @response="handleResponseFromMakeFileStructure"
-        :file="file"
-      />
+    <b-modal
+      id="bv-modal-make-folder-structure"
+      hide-footer
+      :hide-header-close="true"
+      :no-close-on-backdrop="true"
+    >
+      <template v-slot:modal-title>Folder Structure:</template>
+      <MakeFolderStructure @response="handleResponseFromMakeFileStructure" :file="file" />
     </b-modal>
   </div>
 </template>
@@ -374,6 +354,9 @@ export default {
 
     resetData() {
       this.initLoaded = false;
+      this.file = null;
+      this.errorInTotalLines = false;
+      this.errors = null;
       let temp = {
         attention: "",
         regarding: "",

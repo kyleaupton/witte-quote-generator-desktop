@@ -8,6 +8,12 @@
             v-model="company"
             placeholder="Company"
             :state="companyValidation"
+            list="company-datalist"
+          />
+          <b-form-datalist
+            class="make-folder-struc-datalist"
+            id="company-datalist"
+            :options="companyList"
           />
           <b-form-input
             class="make-foler-scruc-input-item"
@@ -22,14 +28,13 @@
       class="make-folder-struc-button"
       @click="handleCancel"
       variant="outline-secondary"
-      >No, thanks.</b-button
-    >
+    >No, thanks.</b-button>
     <b-button
       class="make-folder-struc-button"
       @click="handleMakeStructure"
       variant="outline-primary"
-      >Make Structure</b-button
-    >
+      :disabled="!generateValidation"
+    >Make Structure</b-button>
   </div>
 </template>
 
@@ -46,12 +51,13 @@ export default {
   data() {
     return {
       company: "",
-      meta: ""
+      meta: "",
+      companyList: []
     };
   },
 
-  created() {
-    console.log(this.file);
+  mounted() {
+    this.getCompanyList();
   },
 
   computed: {
@@ -63,6 +69,10 @@ export default {
     metaValidation() {
       let validation = checkMeta(this.meta);
       return !validation.errorInMeta;
+    },
+
+    generateValidation() {
+      return this.companyValidation && this.metaValidation;
     }
   },
 
@@ -106,6 +116,26 @@ export default {
       };
       this.$emit("response", payload);
       this.$bvModal.hide("bv-modal-make-folder-structure");
+    },
+
+    getCompanyList() {
+      let workingDir = path.join(os.homedir(), "Dropbox", "2 - Quotes");
+      let temp = fs.readdirSync(workingDir);
+
+      let dirsToRemove = [
+        ".DS_Store",
+        "1 - Archives 2018-2005",
+        "1 - India",
+        "1 - Templates"
+      ];
+
+      for (let i = 0; i < dirsToRemove.length; i++) {
+        let indexToRemove = temp.indexOf(dirsToRemove[i]);
+        if (indexToRemove > -1) {
+          temp.splice(indexToRemove, 1);
+        }
+      }
+      this.companyList = temp;
     }
   },
 
