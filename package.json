@@ -1,6 +1,6 @@
 {
   "name": "witte-quote-generator-desktop",
-  "version": "0.20.2",
+  "version": "1.0.0",
   "private": true,
   "author": "Kyle Upton",
   "description": "Utility app for Witte Pumps and Technology LLC.",
@@ -12,7 +12,8 @@
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder"
+    "dist": "electron-builder",
+    "build-deploy": "yarn electron:build -p always"
   },
   "main": "background.js",
   "dependencies": {
