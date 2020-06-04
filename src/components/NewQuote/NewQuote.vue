@@ -342,7 +342,7 @@ export default {
     },
 
     extraLinesLogic() {
-      if (this.masterData.totalLines + this.selectOptions.selected > 25) {
+      if (this.masterData.totalLines + this.selectOptions.selected > 35) {
         this.errorInTotalLines = true;
       } else {
         this.masterData.totalLines =

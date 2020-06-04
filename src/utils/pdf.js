@@ -52,14 +52,14 @@ function getPdfText(path) {
           for (let i = 1; i <= totalPages; i++) {
             let getPagePromise = new Promise((resolve, reject) => {
               getPageText(i, PDFDocumentInstance)
-                .then(textPage => {
+                .then((textPage) => {
                   resolve(textPage);
                 })
-                .catch(reason => {
+                .catch((reason) => {
                   reject(reason);
                 });
             });
-            await getPagePromise.then(data => {
+            await getPagePromise.then((data) => {
               output += data;
             });
           }
@@ -82,10 +82,10 @@ function getParts(pdfFile, filePath) {
       // Promise to get text from pdf
       let getPdfTextPromise = new Promise((resolve, reject) => {
         getPdfText(pdfFile)
-          .then(data => {
+          .then((data) => {
             resolve(data);
           })
-          .catch(reason => {
+          .catch((reason) => {
             reject(reason);
           });
       });
@@ -93,10 +93,10 @@ function getParts(pdfFile, filePath) {
       // Promise to get metadata from file path, this is also returned in payload.
       let getPdfMetaData = new Promise((resolve, reject) => {
         getMetaData(filePath)
-          .then(data => {
+          .then((data) => {
             resolve(data);
           })
-          .catch(reason => {
+          .catch((reason) => {
             reject(reason);
           });
       });
@@ -109,16 +109,16 @@ function getParts(pdfFile, filePath) {
         parts: null,
         company: "",
         quoteNumFromPath: "",
-        quoteDescFromPath: ""
+        quoteDescFromPath: "",
       };
 
       let pdfText = "";
 
-      await getPdfTextPromise.then(data => {
+      await getPdfTextPromise.then((data) => {
         pdfText = data;
       });
 
-      await getPdfMetaData.then(data => {
+      await getPdfMetaData.then((data) => {
         payload.errorInPath = data.errorInPath;
         payload.errors = data.errors;
         payload.isInDropbox = data.isInDropbox;
@@ -158,11 +158,11 @@ function getParts(pdfFile, filePath) {
           surcharge: 1,
           enPartNum: {
             partNum: null,
-            isEn: true
+            isEn: true,
           },
           dePartNum: null,
           itemPos: null,
-          isError: false
+          isError: false,
         };
 
         // Item position
@@ -196,9 +196,8 @@ function getParts(pdfFile, filePath) {
         payload.unitPrice = unitPrice[0];
 
         // Old material number or en part number
-        let enPartNum = rawParts[i].match(/number:.+\s/g);
+        let enPartNum = rawParts[i].match(/\d{3}.\d{4}-\d{2}.\d{3}/g);
         if (enPartNum) {
-          enPartNum[0] = enPartNum[0].replace("number:", "");
           enPartNum[0] = enPartNum[0].trim();
           payload.enPartNum.partNum = enPartNum[0];
         } else {
@@ -216,19 +215,28 @@ function getParts(pdfFile, filePath) {
 
           let materialCodePromise = new Promise((resolve, reject) => {
             db.getItem("materials", materialCode)
-              .then(data => {
+              .then((data) => {
                 resolve(data);
               })
-              .catch(reason => {
+              .catch((reason) => {
                 reject(reason);
               });
           });
 
           await materialCodePromise
-            .then(data => {
+            .then((data) => {
               payload.material = data.value;
+              if (
+                data.value.includes("A4") ||
+                data.value.includes("Stainless") ||
+                data.value.includes("stainless")
+              ) {
+                payload.surcharge = 1.0565;
+              }
             })
-            .catch(reason => {
+            .catch((reason) => {
+              console.log(reason);
+              console.log("Entered catch block material promise");
               payload.material = "PLEASE FILL IN";
               payload.isError = true;
             });
@@ -238,19 +246,19 @@ function getParts(pdfFile, filePath) {
 
           let descriptionCodePromsie = new Promise((resolve, reject) => {
             db.getItem("descriptions", descriptionCode)
-              .then(data => {
+              .then((data) => {
                 resolve(data);
               })
-              .catch(reason => {
+              .catch((reason) => {
                 reject(reason);
               });
           });
 
           await descriptionCodePromsie
-            .then(data => {
+            .then((data) => {
               payload.description = data.value;
             })
-            .catch(reason => {
+            .catch((reason) => {
               payload.isError = true;
               payload.material = "PLEASE FILL IN";
             });
